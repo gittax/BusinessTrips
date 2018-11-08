@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using BusinessTripsBackend.Models;
+using BTApp.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace BusinessTripsBackend
+namespace BTApp
 {
     public class Startup
     {

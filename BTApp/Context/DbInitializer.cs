@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Query.ExpressionVisitors.Internal;
 
-namespace BusinessTripsBackend.Models
+namespace BTApp.Models
 {
     internal class DbInitializer
     {

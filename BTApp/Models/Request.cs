@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BusinessTripsBackend.Models
+namespace BTApp.Models
 {
     public class Request
     {

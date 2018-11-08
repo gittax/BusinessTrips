@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using BusinessTripsBackend.Models;
+using BTApp.Models;
 
-namespace BusinessTripsBackend
+namespace BTApp
 {
     public class Program
     {

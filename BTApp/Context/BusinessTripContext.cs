@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace BusinessTripsBackend.Models
+namespace BTApp.Models
 {
     public class BusinessTripContext : DbContext
     {
