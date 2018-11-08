@@ -5,8 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using BusinessTripsBackend.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace BTApp
+namespace BusinessTripsBackend
 {
     public class Startup
     {
@@ -27,6 +29,10 @@ namespace BTApp
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=BusinessTripBackend;Trusted_Connection=True;ConnectRetryCount=0";
+            services.AddDbContext<BusinessTripContext>
+                (options => options.UseSqlServer(connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
