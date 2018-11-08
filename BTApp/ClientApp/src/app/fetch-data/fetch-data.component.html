@@ -25,17 +25,19 @@
 
 <table class='table' *ngIf="employeesBase">
   <thead>
-  <tr>
-    <th>EmployeeBaseId</th>
-    <th>Code</th>
-    <th>Name</th>
-  </tr>
+    <tr>
+      <th>EmployeeBaseId</th>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Projects</th>
+    </tr>
   </thead>
   <tbody>
-  <tr>
-    <td>{{ employeesBase.EmployeeBaseId }}</td>
-    <td>{{ employeesBase.Code }}</td>
-    <td>{{ employeesBase.Name }}</td>
-  </tr>
+    <tr *ngFor="let employeeBase of employeesBase">
+      <td>{{ employeeBase.EmployeeBaseId }}</td>
+      <td>{{ employeeBase.Code }}</td>
+      <td>{{ employeeBase.Name }}</td>
+      <td>{{ employeeBase.EmployeeProjectAssigns }}</td>
+    </tr>
   </tbody>
 </table>
