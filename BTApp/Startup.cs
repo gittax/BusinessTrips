@@ -30,7 +30,7 @@ namespace BTApp
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=BusinessTripBackend;Trusted_Connection=True;ConnectRetryCount=0";
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=BTApp;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<BusinessTripContext>
                 (options => options.UseSqlServer(connection));
         }

@@ -22,3 +22,20 @@
     </tr>
   </tbody>
 </table>
+
+<table class='table' *ngIf="employeesBase">
+  <thead>
+  <tr>
+    <th>EmployeeBaseId</th>
+    <th>Code</th>
+    <th>Name</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>{{ employeesBase.EmployeeBaseId }}</td>
+    <td>{{ employeesBase.Code }}</td>
+    <td>{{ employeesBase.Name }}</td>
+  </tr>
+  </tbody>
+</table>
