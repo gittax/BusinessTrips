@@ -6,20 +6,38 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
+import { Response } from '_debugger';
+
 @Component({
   selector: 'app-fetch-data',
   templateUrl: './fetch-data.component.html'
 })
 export class FetchDataComponent {
-  private http: HttpClient;
   public forecasts: WeatherForecast[];
   public employeesBase: EmployeeBase[];
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     http.get<WeatherForecast[]>(baseUrl + 'api/SampleData/WeatherForecasts')
-      .subscribe(result => { this.forecasts = result; }, error => console.error(error));
+      .subscribe(result => { this.forecasts = result; }, error => console.error(error)); 
+
     http.get<EmployeeBase[]>(baseUrl + `api/EmployeeBases`)
       .subscribe(result => { this.employeesBase = result; }, error => console.error(error)); 
+
+    http.get<EmployeeBase[]>(baseUrl + `api/EmployeeBases`)
+      .subscribe(result => { console.log(result); }, error => console.error(error)); 
+
+    http.get<WeatherForecast[]>(baseUrl + 'api/SampleData/WeatherForecasts')
+      .subscribe(result => { console.log(result); }, error => console.error(error));
+
+   /* http.get(baseUrl + `api/EmployeeBases`)
+      .map((res: Response) => res)
+      .do(value => console.log(value));
+     http.get<EmployeeBase[]>(baseUrl + `api/EmployeeBases`)
+      .subscribe((data: EmployeeBase[]) => this.employeesBase.forEach(employeeBase => {
+        employeeBase.EmployeeBaseId = data['EmployeeBaseId'],
+        employeeBase.Code = data['Code'],
+        employeeBase.Name = data['Name'],
+        employeeBase.EmployeeProjectAssigns = data['EmployeeProjectAssigns'] }, error => console.error(error))); */
 
   }
 
@@ -36,10 +54,10 @@ export class FetchDataComponent {
 }
 
 interface EmployeeBase {
-  EmployeeBaseId: number;
-  Code: string;
-  Name: string;
-  EmployeeProjectAssigns: string;
+  employeeBaseId: number;
+  code: string;
+  name: string;
+  employeeProjectAssigns: string;
 }
 interface WeatherForecast {
   dateFormatted: string;
