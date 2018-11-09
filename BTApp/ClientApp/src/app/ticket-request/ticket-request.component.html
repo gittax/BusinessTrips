@@ -1,0 +1,68 @@
+<h1>Ticket requests</h1>
+
+<p>Fetching requests from the DB.</p>
+
+<p *ngIf="!ticketRequests"><em>Loading...</em></p>
+
+<table class='table' *ngIf="employeesBase">
+    <thead>
+      <tr>
+        <th>EmployeeBaseId</th>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Projects</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employeeBase of employeesBase">
+        <td>{{ employeeBase.employeeBaseId }}</td>
+        <td>{{ employeeBase.code }}</td>
+        <td>{{ employeeBase.name }}</td>
+        <td>{{ employeeBase.employeeProjectAssigns }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+<table class='table' *ngIf="ticketRequests">
+  <thead>
+    <tr>
+      <th>ID запроса</th>
+      <th>Номер заявки</th>
+      <th>Дата</th>
+      <th>Заявитель</th>
+      <th>Номер командировки</th>
+      <th>Бюджет</th>
+      <th>Стоимость</th>
+      <th>Менеджер проекта</th>
+      <th>Статус заявки</th>
+      <th>Офис менеджер</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let ticketRequest of ticketRequests">
+      <td>{{ ticketRequest.requestId }}</td>
+      <td>{{ ticketRequest.requestNumber }}</td>
+      <td>{{ ticketRequest.date }}</td>
+      <td>{{ ticketRequest.declarer.name }}</td>
+      <td>{{ ticketRequest.businessTripNumber }}</td>
+      <td>{{ ticketRequest.budget }}</td>
+      <td>{{ ticketRequest.cost }}</td>
+      <td>{{ ticketRequest.manager.name }}</td>
+      <td>{{ ticketRequest.status }}</td>
+      <td>{{ ticketRequest.officeManager.name }}</td>
+    </tr>
+    <tr>
+      <td><input ng-model="ticketRequests[ticketRequests.length].requestId"></td>
+      <td><input ng-model="ticketRequests[ticketRequests.length].requestNumber"></td>
+      <td><input ng-model="ticketRequests[ticketRequests.length].date"></td>
+      <td><select novalidate="" ng-model="ticketRequests[ticketRequests.length].declarer" ng-options="x as x.name for x in employeesBase"></select></td>
+      <td><input ng-model="ticketRequests[ticketRequests.length].businessTripNumber"></td>
+      <td><input ng-model="ticketRequests[ticketRequests.length].budget"></td>
+      <td><input ng-model="ticketRequests[ticketRequests.length].cost"></td>
+      <td><select novalidate="" ng-model="ticketRequests[ticketRequests.length].manager" ng-options="x as x.name for x in employeesBase"></select></td>
+      <td><input disabled ng-model="ticketRequests[ticketRequests.length].status"></td> 
+      <td><select novalidate="" ng-model="ticketRequests[ticketRequests.length].officeManager" ng-options="x as x.name for x in employeesBase"></select></td>
+    </tr>
+  </tbody>
+</table>
+<button onclick="">Add <i class='fas fa-plus'></i></button>

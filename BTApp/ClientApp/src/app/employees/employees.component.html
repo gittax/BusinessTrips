@@ -1,0 +1,36 @@
+<h1>Ticket requests</h1>
+
+<p>Fetching requests from the DB.</p>
+
+<p *ngIf="!employees"><em>Loading...</em></p>
+
+<table class='table' *ngIf="employees">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Имя</th>
+      <th>Код сотрудника</th>
+      <th>Тип документа</th>
+      <th>Номер документа</th>
+      <th>Действителен до</th>
+      <th>Пол</th>
+      <th>Дата рождения</th>
+      <th>Место рождения</th>
+      <th>ID заявки</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let employee of employees">
+      <td>{{ employee.employeeId }}</td>
+      <td>{{ employee.employeeBase.name }}</td>
+      <td>{{ employee.employeeBase.code }}</td>
+      <td>{{ employee.docType }}</td>
+      <td>{{ employee.docNumber }}</td>
+      <td>{{ employee.validThrough }}</td>
+      <td>{{ employee.gender }}</td>
+      <td>{{ employee.birthDate }}</td>
+      <td>{{ employee.birthPlace }}</td>
+      <td>{{ employee.request.requestId }}</td>
+    </tr>
+  </tbody>
+</table>

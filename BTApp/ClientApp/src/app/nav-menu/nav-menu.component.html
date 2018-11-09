@@ -27,6 +27,16 @@
                         <span class='glyphicon glyphicon-th-list'></span> Fetch data
                     </a>
                 </li>
+                <li [routerLinkActive]='["link-active"]'>
+                    <a [routerLink]='["/ticket-request"]' (click)='collapse()'>
+                        <span class='glyphicon glyphicon-th-list'></span> Ticket request
+                    </a>
+                </li>
+                <li [routerLinkActive]='["link-active"]'>
+                    <a [routerLink]='["/employees"]' (click)='collapse()'>
+                        <span class='glyphicon glyphicon-th-list'></span> Ticket request
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
