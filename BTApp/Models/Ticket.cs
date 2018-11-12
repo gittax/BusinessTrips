@@ -20,6 +20,7 @@ namespace BTApp.Models
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime ArrivalTime { get; set; }
 
+        public int EmployeeId { get; set; }
         public virtual Employee Employee { get; set; }
         public virtual Request Request { get; set; }
     }

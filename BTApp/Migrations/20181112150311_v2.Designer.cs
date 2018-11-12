@@ -4,14 +4,16 @@ using BTApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BTApp.Migrations
 {
     [DbContext(typeof(BusinessTripContext))]
-    partial class BusinessTripContextModelSnapshot : ModelSnapshot
+    [Migration("20181112150311_v2")]
+    partial class v2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -189,7 +191,7 @@ namespace BTApp.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("ProjectId");
+                    b.Property<int?>("ProjectId");
 
                     b.HasKey("SubprojectId");
 
@@ -301,9 +303,8 @@ namespace BTApp.Migrations
             modelBuilder.Entity("BTApp.Models.Subproject", b =>
                 {
                     b.HasOne("BTApp.Models.Project", "Project")
-                        .WithMany("Subprojects")
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany()
+                        .HasForeignKey("ProjectId");
                 });
 
             modelBuilder.Entity("BTApp.Models.Ticket", b =>

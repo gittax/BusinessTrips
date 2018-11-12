@@ -8,7 +8,7 @@ namespace BTApp.Models
 {
     public class Project
     {
-        public int ProjectID { get; set; }
+        public int ProjectId { get; set; }
 
         [Display(Name = "Project Name")]
         public string Name { get; set; }
@@ -18,7 +18,6 @@ namespace BTApp.Models
 
         [Display(Name = "Employees")]
         public ICollection<EmployeeProjectAssign> EmployeeProjectAssigns { get; set; }
-        public ICollection<Request> Requests { get; set; }
         public ICollection<Subproject> Subprojects { get; set; }
     }
 }

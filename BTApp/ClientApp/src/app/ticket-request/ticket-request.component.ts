@@ -1,54 +1,62 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { httpFactory } from '@angular/platform-server/src/http';
+import { HttpService } from '../services/http.service';
+import { EmployeeBase } from '../models/models';
+import { TicketRequest } from '../models/models';
 
 @Component({
   selector: 'app-ticket-request',
   templateUrl: './ticket-request.component.html',
-  styleUrls: ['./ticket-request.component.css']
+  styleUrls: ['./ticket-request.component.css'],
+  providers: [HttpService]
 })
 
 export class TicketRequestComponent implements OnInit {
   public ticketRequests: TicketRequest[];
   public employeesBase: EmployeeBase[];
+  done: boolean = false;
+  employeeBase: EmployeeBase = new EmployeeBase();
+  ticketRequest: TicketRequest = new TicketRequest();
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<TicketRequest[]>(baseUrl + `api/Requests`)
-      .subscribe(result => { this.ticketRequests = result; }, error => console.error(error)); 
-    http.get<TicketRequest[]>(baseUrl + `api/Requests`)
-      .subscribe(result => { console.log(result) }, error => console.error(error)); 
+  constructor(private httpService: HttpService) {}
 
-    http.get<EmployeeBase[]>(baseUrl + `api/EmployeeBases`)
-      .subscribe(result => { this.employeesBase = result; }, error => console.error(error)); 
-    http.get<EmployeeBase[]>(baseUrl + `api/EmployeeBases`)
-      .subscribe(result => { console.log(result) }, error => console.error(error));
-  }
-
-  postRequest(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.post<TicketRequest[]>(baseUrl + `api/Requests`, this.ticketRequests)
-  }
-  
   ngOnInit() {
+    this.httpService.getEmployeeBase()
+      .subscribe(result => { this.employeesBase = result; }, error => console.error(error));
+
+    this.httpService.getTicketRequest()
+      .subscribe(result => { this.ticketRequests = result; }, error => console.error(error));
+
+    //console.log(this.employeesBase);
   }
 
-}
+  addEmployeeBase(newEmployeeBase: EmployeeBase) {
+    this.httpService.postEmployeeBase(newEmployeeBase)
+      .subscribe(result => { console.log(result) }, error => console.error(error));
+    this.ngOnInit();
+  }
 
-interface TicketRequest {
-  requestId: number;
-  requestNumber: string;
-  date: Date;
-  declarer: EmployeeBase;
-  businessTripNumber: string;
-  budget: number;
-  cost: number;
-  manager: EmployeeBase;
-  status: string;
-  officeManager: EmployeeBase;
-}
+  deleteEmployeeBase(id: string) {
+    this.httpService.deleteEmployeeBase(id)
+      .subscribe(result => { console.log(result) }, error => console.error(error));
+    this.ngOnInit();
+  }
 
-interface EmployeeBase {
-  employeeBaseId: number;
-  code: string;
-  name: string;
-  employeeProjectAssigns: string;
+  addTicketRequest(newTicketRequest: TicketRequest) {
+    this.httpService.postTicketRequest(newTicketRequest)
+      .subscribe(result => { console.log(result) }, error => console.error(error));
+    this.ngOnInit();
+  }
+
+  deleteTicketRequest(id: string) {
+    this.httpService.deleteTicketRequest(id)
+      .subscribe(result => { console.log(result) }, error => console.error(error));
+    this.ngOnInit();
+  }
+
+  check() {
+    this.ngOnInit();
+    //console.log(this.employeesBase);
+    //console.log(this.declarer);
+  }
+
 }

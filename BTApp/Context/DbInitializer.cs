@@ -33,18 +33,6 @@ namespace BTApp.Models
             }
             context.SaveChanges();
 
-            var subProjects = new Subproject[]
-            {
-                new Subproject { Name = "Subproject 1"},
-                new Subproject { Name = "Subproject 2"},
-                new Subproject { Name = "Subproject 3"}
-            };
-            foreach (Subproject p in subProjects)
-            {
-                context.Subproject.Add(p);
-            }
-            context.SaveChanges();
-
             var projects = new Project[]
             {
                 new Project { Name = "Project 1", Manager = employees.Single(s => s.Name == "Carson Alexander")},
@@ -60,10 +48,26 @@ namespace BTApp.Models
             }
             context.SaveChanges();
 
+            var subProjects = new Subproject[]
+            {
+                new Subproject { Name = "Subproject 1", Project=projects[1]},
+                new Subproject { Name = "Subproject 2", Project=projects[1]},
+                new Subproject { Name = "Subproject 3", Project=projects[1]},
+                new Subproject { Name = "Subproject 4", Project=projects[2]},
+                new Subproject { Name = "Subproject 5", Project=projects[3]},
+                new Subproject { Name = "Subproject 6", Project=projects[3]}
+            };
+            foreach (Subproject p in subProjects)
+            {
+                context.Subproject.Add(p);
+            }
+            context.SaveChanges();
+
             int CodeCounter(int x)
             {
                 int code = 100;
                 code += x;
+                i++;
                 return code;
             }
         }

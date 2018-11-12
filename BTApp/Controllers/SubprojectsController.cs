@@ -55,7 +55,7 @@ namespace BTApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != subproject.Id)
+            if (id != subproject.SubprojectId)
             {
                 return BadRequest();
             }
@@ -93,7 +93,7 @@ namespace BTApp.Controllers
             _context.Subproject.Add(subproject);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetSubproject", new { id = subproject.Id }, subproject);
+            return CreatedAtAction("GetSubproject", new { id = subproject.SubprojectId }, subproject);
         }
 
         // DELETE: api/Subprojects/5
@@ -119,7 +119,7 @@ namespace BTApp.Controllers
 
         private bool SubprojectExists(int id)
         {
-            return _context.Subproject.Any(e => e.Id == id);
+            return _context.Subproject.Any(e => e.SubprojectId == id);
         }
     }
 }

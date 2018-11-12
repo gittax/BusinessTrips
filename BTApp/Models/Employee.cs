@@ -9,6 +9,7 @@ namespace BTApp.Models
 {
     public class Employee
     {
+        [Key]
         public int EmployeeId { get; set; }
         public DocType DocType { get; set; }
         public string DocNumber { get; set; }
@@ -25,9 +26,13 @@ namespace BTApp.Models
 
         public string BirthPlace { get; set; }
 
-        public virtual Request Request { get; set; }
-        public ICollection<EmployeeRouteAssign> EmployeeRouteAssigns { get; set; }
+        public int EmployeeBaseId { get; set; }
         public virtual EmployeeBase EmployeeBase { get; set; }
+
+        public virtual Ticket Ticket { get; set; }
+
+        public ICollection<EmployeeRouteAssign> EmployeeRouteAssigns { get; set; }
+        public ICollection<EmployeeProjectAssign> EmployeeProjectAssigns { get; set; }
     }
     public enum GenderType
     {

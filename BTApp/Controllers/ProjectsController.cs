@@ -55,7 +55,7 @@ namespace BTApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != project.ProjectID)
+            if (id != project.ProjectId)
             {
                 return BadRequest();
             }
@@ -93,7 +93,7 @@ namespace BTApp.Controllers
             _context.Project.Add(project);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetProject", new { id = project.ProjectID }, project);
+            return CreatedAtAction("GetProject", new { id = project.ProjectId }, project);
         }
 
         // DELETE: api/Projects/5
@@ -119,7 +119,7 @@ namespace BTApp.Controllers
 
         private bool ProjectExists(int id)
         {
-            return _context.Project.Any(e => e.ProjectID == id);
+            return _context.Project.Any(e => e.ProjectId == id);
         }
     }
 }

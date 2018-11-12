@@ -10,6 +10,7 @@ namespace BTApp.Models
         public int EmployeeBaseId { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
+        public virtual Employee Employee { get; set; }
         public ICollection<EmployeeProjectAssign> EmployeeProjectAssigns { get; set; }
     }
 }

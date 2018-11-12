@@ -5,23 +5,31 @@
 <p *ngIf="!ticketRequests"><em>Loading...</em></p>
 
 <table class='table' *ngIf="employeesBase">
-    <thead>
-      <tr>
-        <th>EmployeeBaseId</th>
-        <th>Code</th>
-        <th>Name</th>
-        <th>Projects</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let employeeBase of employeesBase">
-        <td>{{ employeeBase.employeeBaseId }}</td>
-        <td>{{ employeeBase.code }}</td>
-        <td>{{ employeeBase.name }}</td>
-        <td>{{ employeeBase.employeeProjectAssigns }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <thead>
+    <tr>
+      <th>EmployeeBaseId</th>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Projects</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let employeeBase of employeesBase">
+      <td>{{ employeeBase.employeeBaseId }}</td>
+      <td>{{ employeeBase.code }}</td>
+      <td>{{ employeeBase.name }}</td>
+      <td>{{ employeeBase.employeeProjectAssigns }}</td>
+      <td><button (click)="deleteEmployeeBase(employeeBase.employeeBaseId)">Del</button></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input [(ngModel)]=" employeeBase.code "></td>
+      <td><input [(ngModel)]=" employeeBase.name "></td>
+      <td><input [(ngModel)]=" employeeBase.employeeProjectAssigns "></td>
+    </tr>
+  </tbody>
+</table>
+<button *ngIf="employeesBase" (click)='addEmployeeBase(employeeBase)'>Add <i class='fas fa-plus'></i></button>
 
 <table class='table' *ngIf="ticketRequests">
   <thead>
@@ -43,26 +51,28 @@
       <td>{{ ticketRequest.requestId }}</td>
       <td>{{ ticketRequest.requestNumber }}</td>
       <td>{{ ticketRequest.date }}</td>
-      <td>{{ ticketRequest.declarer.name }}</td>
+      <td>{{ ticketRequest.declarer }}</td>
       <td>{{ ticketRequest.businessTripNumber }}</td>
       <td>{{ ticketRequest.budget }}</td>
       <td>{{ ticketRequest.cost }}</td>
-      <td>{{ ticketRequest.manager.name }}</td>
+      <td>{{ ticketRequest.manager }}</td>
       <td>{{ ticketRequest.status }}</td>
-      <td>{{ ticketRequest.officeManager.name }}</td>
+      <td>{{ ticketRequest.officeManager }}</td>
+      <td><button (click)="deleteTicketRequest(ticketRequest.requestId)">Del</button></td>
     </tr>
     <tr>
-      <td><input ng-model="ticketRequests[ticketRequests.length].requestId"></td>
-      <td><input ng-model="ticketRequests[ticketRequests.length].requestNumber"></td>
-      <td><input ng-model="ticketRequests[ticketRequests.length].date"></td>
-      <td><select novalidate="" ng-model="ticketRequests[ticketRequests.length].declarer" ng-options="x as x.name for x in employeesBase"></select></td>
-      <td><input ng-model="ticketRequests[ticketRequests.length].businessTripNumber"></td>
-      <td><input ng-model="ticketRequests[ticketRequests.length].budget"></td>
-      <td><input ng-model="ticketRequests[ticketRequests.length].cost"></td>
-      <td><select novalidate="" ng-model="ticketRequests[ticketRequests.length].manager" ng-options="x as x.name for x in employeesBase"></select></td>
-      <td><input disabled ng-model="ticketRequests[ticketRequests.length].status"></td> 
-      <td><select novalidate="" ng-model="ticketRequests[ticketRequests.length].officeManager" ng-options="x as x.name for x in employeesBase"></select></td>
+      <td></td>
+      <td><input [(ngModel)]="ticketRequest.requestNumber"></td>
+      <td><input type="date" [(ngModel)]="ticketRequest.date"></td>
+      <td><select [(ngModel)]="ticketRequest.declarer"> <option *ngFor="let emp of employeesBase" [value]="emp.employeeBaseId">{{emp.name}}</option></select></td>
+      <td><input [(ngModel)]="ticketRequest.businessTripNumber"></td>
+      <td><input [(ngModel)]="ticketRequest.budget"></td>
+      <td><input [(ngModel)]="ticketRequest.cost"></td>
+      <td><select [(ngModel)]="ticketRequest.manager"> <option *ngFor="let emp of employeesBase" [value]="emp.employeeBaseId">{{emp.name}}</option></select></td>
+      <td><input disabled [(ngModel)]="ticketRequest.status"></td>
+      <td><select [(ngModel)]="ticketRequest.officeManager"> <option *ngFor="let emp of employeesBase" [value]="emp.employeeBaseId">{{emp.name}}</option></select></td>
     </tr>
   </tbody>
 </table>
-<button onclick="">Add <i class='fas fa-plus'></i></button>
+<button *ngIf="ticketRequests" (click)='addTicketRequest(ticketRequest)'>Add <i class='fas fa-plus'></i></button>
+<button (click)='check()'>Check <i class='fas fa-plus'></i></button>
