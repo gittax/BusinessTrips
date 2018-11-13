@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace BTApp.Models
 {
-    public class EmployeeProjectAssign
+    public class EmployeeBaseProjectAssign
     {
-        public int EmployeeID { get; set; }
-        public int ProjectID { get; set; }
+        public int EmployeeBaseId { get; set; }
+        public int ProjectId { get; set; }
         public EmployeeBase EmployeeBase { get; set; }
         public Project Project { get; set; }
     }

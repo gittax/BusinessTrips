@@ -22,7 +22,8 @@ namespace BTApp.Models
         public virtual EmployeeBase Manager { get; set; }
         public virtual EmployeeBase OfficeManager { get; set; }
         public int ProjectId { get; set; }
-        public virtual Project Project { get; set; }
+        public Project Project { get; set; }
+        public Subproject Subproject { get; set; }
     }
     public enum StatusType
     {

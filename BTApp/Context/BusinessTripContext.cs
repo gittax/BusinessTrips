@@ -20,7 +20,7 @@ namespace BTApp.Models
         public DbSet<Subproject> Subproject { get; set; }
         public DbSet<Route> Route { get; set; }
         public DbSet<Ticket> Ticket { get; set; }
-        public DbSet<EmployeeProjectAssign> ProjectAssignment { get; set; }
+        public DbSet<EmployeeBaseProjectAssign> ProjectAssignment { get; set; }
         public DbSet<EmployeeRouteAssign> RouteAssignment { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -33,12 +33,12 @@ namespace BTApp.Models
             modelBuilder.Entity<Route>().ToTable("Route");
             modelBuilder.Entity<Ticket>().ToTable("Ticket");
             modelBuilder.Entity<EmployeeRouteAssign>().ToTable("EmployeeRouteAssign");
-            modelBuilder.Entity<EmployeeProjectAssign>().ToTable("EmployeeProjectAssign");
+            modelBuilder.Entity<EmployeeBaseProjectAssign>().ToTable("EmployeeBaseProjectAssign");
 
-            modelBuilder.Entity<EmployeeProjectAssign>()
-                .HasKey(c => new { c.EmployeeID, c.ProjectID });
+            modelBuilder.Entity<EmployeeBaseProjectAssign>()
+                .HasKey(c => new { c.EmployeeBaseId, c.ProjectId });
             modelBuilder.Entity<EmployeeRouteAssign>()
-                .HasKey(c => new { c.EmployeeID, c.RouteID });
+                .HasKey(c => new { c.EmployeeId, c.RouteId });
         }
     }
 }

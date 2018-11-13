@@ -17,7 +17,7 @@ namespace BTApp.Models
         public EmployeeBase Manager { get; set; }
 
         [Display(Name = "Employees")]
-        public ICollection<EmployeeProjectAssign> EmployeeProjectAssigns { get; set; }
+        public ICollection<EmployeeBaseProjectAssign> EmployeeProjectAssigns { get; set; }
         public ICollection<Subproject> Subprojects { get; set; }
     }
 }

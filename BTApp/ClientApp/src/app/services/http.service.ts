@@ -1,11 +1,7 @@
 import { Inject } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { EmployeeBase } from '../models/models';
-import { TicketRequest } from '../models/models';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-
+import { EmployeeBase, Employee, EmployeeBaseProjectAssign, EmployeeRouteAssign, Request, Project, Route, Subproject, Ticket } from '../models/models';
 @Injectable()
 export class HttpService {
   private baseUrl: string;
@@ -26,18 +22,27 @@ export class HttpService {
     return this.http.delete<EmployeeBase>(this.baseUrl + `api/EmployeeBases/${id}`);
   }
 
-  getTicketRequest() {
-    return this.http.get<TicketRequest[]>(this.baseUrl + `api/Requests`)
+
+
+  getRequest() {
+    return this.http.get<Request[]>(this.baseUrl + `api/Requests`)
   }
 
-  postTicketRequest(ticketRequest: TicketRequest/*, declarer: EmployeeBase, manager: EmployeeBase, officeManager: EmployeeBase*/) {
-    /* ticketRequest.declarer = declarer;
-    ticketRequest.manager = manager;
-    ticketRequest.officeManager = officeManager;*/
-    return this.http.post<TicketRequest>(this.baseUrl + `api/Requests`, ticketRequest);
+  postRequest(request: Request) {
+    return this.http.post<Request>(this.baseUrl + `api/Requests`, request);
   }
 
-  deleteTicketRequest(id: string) {
-    return this.http.delete<TicketRequest>(this.baseUrl + `api/Requests/${id}`);
+  deleteRequest(id: string) {
+    return this.http.delete<Request>(this.baseUrl + `api/Requests/${id}`);
+  }
+
+
+
+  getProject() {
+    return this.http.get<Project[]>(this.baseUrl + `api/Projects`)
+  }
+
+  getSubproject() {
+    return this.http.get<Subproject[]>(this.baseUrl + `api/Subprojects`)
   }
 }

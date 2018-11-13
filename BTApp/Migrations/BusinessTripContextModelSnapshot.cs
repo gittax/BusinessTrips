@@ -62,32 +62,32 @@ namespace BTApp.Migrations
                     b.ToTable("EmployeeBase");
                 });
 
-            modelBuilder.Entity("BTApp.Models.EmployeeProjectAssign", b =>
+            modelBuilder.Entity("BTApp.Models.EmployeeBaseProjectAssign", b =>
                 {
-                    b.Property<int>("EmployeeID");
+                    b.Property<int>("EmployeeBaseId");
 
-                    b.Property<int>("ProjectID");
+                    b.Property<int>("ProjectId");
 
-                    b.Property<int?>("EmployeeBaseId");
+                    b.Property<int?>("EmployeeId");
 
-                    b.HasKey("EmployeeID", "ProjectID");
+                    b.HasKey("EmployeeBaseId", "ProjectId");
 
-                    b.HasIndex("EmployeeBaseId");
+                    b.HasIndex("EmployeeId");
 
-                    b.HasIndex("ProjectID");
+                    b.HasIndex("ProjectId");
 
-                    b.ToTable("EmployeeProjectAssign");
+                    b.ToTable("EmployeeBaseProjectAssign");
                 });
 
             modelBuilder.Entity("BTApp.Models.EmployeeRouteAssign", b =>
                 {
-                    b.Property<int>("EmployeeID");
+                    b.Property<int>("EmployeeId");
 
-                    b.Property<int>("RouteID");
+                    b.Property<int>("RouteId");
 
-                    b.HasKey("EmployeeID", "RouteID");
+                    b.HasKey("EmployeeId", "RouteId");
 
-                    b.HasIndex("RouteID");
+                    b.HasIndex("RouteId");
 
                     b.ToTable("EmployeeRouteAssign");
                 });
@@ -135,6 +135,8 @@ namespace BTApp.Migrations
 
                     b.Property<int>("Status");
 
+                    b.Property<int?>("SubprojectId");
+
                     b.HasKey("RequestId");
 
                     b.HasIndex("DeclarerEmployeeBaseId");
@@ -144,6 +146,8 @@ namespace BTApp.Migrations
                     b.HasIndex("OfficeManagerEmployeeBaseId");
 
                     b.HasIndex("ProjectId");
+
+                    b.HasIndex("SubprojectId");
 
                     b.ToTable("Request");
                 });
@@ -234,20 +238,20 @@ namespace BTApp.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("BTApp.Models.EmployeeProjectAssign", b =>
+            modelBuilder.Entity("BTApp.Models.EmployeeBaseProjectAssign", b =>
                 {
                     b.HasOne("BTApp.Models.EmployeeBase", "EmployeeBase")
                         .WithMany("EmployeeProjectAssigns")
-                        .HasForeignKey("EmployeeBaseId");
+                        .HasForeignKey("EmployeeBaseId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BTApp.Models.Employee")
                         .WithMany("EmployeeProjectAssigns")
-                        .HasForeignKey("EmployeeID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("EmployeeId");
 
                     b.HasOne("BTApp.Models.Project", "Project")
                         .WithMany("EmployeeProjectAssigns")
-                        .HasForeignKey("ProjectID")
+                        .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -255,12 +259,12 @@ namespace BTApp.Migrations
                 {
                     b.HasOne("BTApp.Models.Employee", "Employee")
                         .WithMany("EmployeeRouteAssigns")
-                        .HasForeignKey("EmployeeID")
+                        .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BTApp.Models.Route", "Route")
                         .WithMany("EmployeeRouteAssigns")
-                        .HasForeignKey("RouteID")
+                        .HasForeignKey("RouteId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -289,6 +293,10 @@ namespace BTApp.Migrations
                         .WithMany()
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("BTApp.Models.Subproject", "Subproject")
+                        .WithMany()
+                        .HasForeignKey("SubprojectId");
                 });
 
             modelBuilder.Entity("BTApp.Models.Route", b =>

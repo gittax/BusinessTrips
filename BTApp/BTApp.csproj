@@ -17,6 +17,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -26,8 +30,36 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20181108111614_InitialCreate.cs" />
+    <Compile Remove="Migrations\20181108111614_InitialCreate.Designer.cs" />
     <Compile Remove="Migrations\20181112150005_v2.cs" />
     <Compile Remove="Migrations\20181112150005_v2.Designer.cs" />
+    <Compile Remove="Migrations\20181112150311_v2.cs" />
+    <Compile Remove="Migrations\20181112150311_v2.Designer.cs" />
+    <Compile Remove="Migrations\20181112151443_v3.cs" />
+    <Compile Remove="Migrations\20181112151443_v3.Designer.cs" />
+    <Compile Remove="Migrations\20181113084356_v1.cs" />
+    <Compile Remove="Migrations\20181113084356_v1.Designer.cs" />
+    <Compile Remove="Migrations\20181113085001_InitialCreate.cs" />
+    <Compile Remove="Migrations\20181113085001_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20181113085108_InitialCreate.cs" />
+    <Compile Remove="Migrations\20181113085108_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20181113090431_check.cs" />
+    <Compile Remove="Migrations\20181113090431_check.Designer.cs" />
+    <Compile Remove="Migrations\20181113094533_subproject_change.cs" />
+    <Compile Remove="Migrations\20181113094533_subproject_change.Designer.cs" />
+    <Compile Remove="Migrations\20181113095358_subproject_change_v2.cs" />
+    <Compile Remove="Migrations\20181113095358_subproject_change_v2.Designer.cs" />
+    <Compile Remove="Migrations\20181113095710_Init.cs" />
+    <Compile Remove="Migrations\20181113095710_Init.Designer.cs" />
+    <Compile Remove="Migrations\20181113100201_Init.cs" />
+    <Compile Remove="Migrations\20181113100201_Init.Designer.cs" />
+    <Compile Remove="Migrations\20181113100359_Init_v1.cs" />
+    <Compile Remove="Migrations\20181113100359_Init_v1.Designer.cs" />
+    <Compile Remove="Migrations\20181113101453_Init_v3.cs" />
+    <Compile Remove="Migrations\20181113101453_Init_v3.Designer.cs" />
+    <Compile Remove="Migrations\20181113101825_Init_v4.cs" />
+    <Compile Remove="Migrations\20181113101825_Init_v4.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

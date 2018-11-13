@@ -7,8 +7,8 @@ namespace BTApp.Models
 {
     public class EmployeeRouteAssign
     {
-        public int EmployeeID { get; set; }
-        public int RouteID { get; set; }
+        public int EmployeeId { get; set; }
+        public int RouteId { get; set; }
         public Employee Employee { get; set; }
         public Route Route { get; set; }
     }

@@ -32,7 +32,7 @@ namespace BTApp.Models
         public virtual Ticket Ticket { get; set; }
 
         public ICollection<EmployeeRouteAssign> EmployeeRouteAssigns { get; set; }
-        public ICollection<EmployeeProjectAssign> EmployeeProjectAssigns { get; set; }
+        public ICollection<EmployeeBaseProjectAssign> EmployeeProjectAssigns { get; set; }
     }
     public enum GenderType
     {

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BTApp.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class initi : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -23,17 +23,42 @@ namespace BTApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Employee",
+                columns: table => new
+                {
+                    EmployeeId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    DocType = table.Column<int>(nullable: false),
+                    DocNumber = table.Column<string>(nullable: true),
+                    ValidThrough = table.Column<DateTime>(nullable: false),
+                    Gender = table.Column<int>(nullable: false),
+                    BirthDate = table.Column<DateTime>(nullable: false),
+                    BirthPlace = table.Column<string>(nullable: true),
+                    EmployeeBaseId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Employee", x => x.EmployeeId);
+                    table.ForeignKey(
+                        name: "FK_Employee_EmployeeBase_EmployeeBaseId",
+                        column: x => x.EmployeeBaseId,
+                        principalTable: "EmployeeBase",
+                        principalColumn: "EmployeeBaseId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Project",
                 columns: table => new
                 {
-                    ProjectID = table.Column<int>(nullable: false)
+                    ProjectId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     ManagerEmployeeBaseId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Project", x => x.ProjectID);
+                    table.PrimaryKey("PK_Project", x => x.ProjectId);
                     table.ForeignKey(
                         name: "FK_Project_EmployeeBase_ManagerEmployeeBaseId",
                         column: x => x.ManagerEmployeeBaseId,
@@ -43,27 +68,33 @@ namespace BTApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EmployeeProjectAssign",
+                name: "EmployeeBaseProjectAssign",
                 columns: table => new
                 {
-                    EmployeeID = table.Column<int>(nullable: false),
-                    ProjectID = table.Column<int>(nullable: false),
-                    EmployeeBaseId = table.Column<int>(nullable: true)
+                    EmployeeBaseId = table.Column<int>(nullable: false),
+                    ProjectId = table.Column<int>(nullable: false),
+                    EmployeeId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EmployeeProjectAssign", x => new { x.EmployeeID, x.ProjectID });
+                    table.PrimaryKey("PK_EmployeeBaseProjectAssign", x => new { x.EmployeeBaseId, x.ProjectId });
                     table.ForeignKey(
-                        name: "FK_EmployeeProjectAssign_EmployeeBase_EmployeeBaseId",
+                        name: "FK_EmployeeBaseProjectAssign_EmployeeBase_EmployeeBaseId",
                         column: x => x.EmployeeBaseId,
                         principalTable: "EmployeeBase",
                         principalColumn: "EmployeeBaseId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EmployeeBaseProjectAssign_Employee_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "Employee",
+                        principalColumn: "EmployeeId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_EmployeeProjectAssign_Project_ProjectID",
-                        column: x => x.ProjectID,
+                        name: "FK_EmployeeBaseProjectAssign_Project_ProjectId",
+                        column: x => x.ProjectId,
                         principalTable: "Project",
-                        principalColumn: "ProjectID",
+                        principalColumn: "ProjectId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -75,18 +106,24 @@ namespace BTApp.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     RequestNumber = table.Column<string>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false),
-                    Declarer = table.Column<string>(nullable: true),
                     BusinessTripNumber = table.Column<string>(nullable: true),
                     Budget = table.Column<double>(nullable: false),
                     Cost = table.Column<double>(nullable: false),
-                    ManagerEmployeeBaseId = table.Column<int>(nullable: true),
                     Status = table.Column<int>(nullable: false),
+                    DeclarerEmployeeBaseId = table.Column<int>(nullable: true),
+                    ManagerEmployeeBaseId = table.Column<int>(nullable: true),
                     OfficeManagerEmployeeBaseId = table.Column<int>(nullable: true),
-                    ProjectID = table.Column<int>(nullable: true)
+                    ProjectId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Request", x => x.RequestId);
+                    table.ForeignKey(
+                        name: "FK_Request_EmployeeBase_DeclarerEmployeeBaseId",
+                        column: x => x.DeclarerEmployeeBaseId,
+                        principalTable: "EmployeeBase",
+                        principalColumn: "EmployeeBaseId",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Request_EmployeeBase_ManagerEmployeeBaseId",
                         column: x => x.ManagerEmployeeBaseId,
@@ -100,63 +137,31 @@ namespace BTApp.Migrations
                         principalColumn: "EmployeeBaseId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Request_Project_ProjectID",
-                        column: x => x.ProjectID,
+                        name: "FK_Request_Project_ProjectId",
+                        column: x => x.ProjectId,
                         principalTable: "Project",
-                        principalColumn: "ProjectID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "ProjectId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Subproject",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    SubprojectId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
-                    ProjectID = table.Column<int>(nullable: true)
+                    ProjectId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Subproject", x => x.Id);
+                    table.PrimaryKey("PK_Subproject", x => x.SubprojectId);
                     table.ForeignKey(
-                        name: "FK_Subproject_Project_ProjectID",
-                        column: x => x.ProjectID,
+                        name: "FK_Subproject_Project_ProjectId",
+                        column: x => x.ProjectId,
                         principalTable: "Project",
-                        principalColumn: "ProjectID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Employee",
-                columns: table => new
-                {
-                    EmployeeId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    DocType = table.Column<int>(nullable: false),
-                    DocNumber = table.Column<string>(nullable: true),
-                    ValidThrough = table.Column<DateTime>(nullable: false),
-                    Gender = table.Column<int>(nullable: false),
-                    BirthDate = table.Column<DateTime>(nullable: false),
-                    BirthPlace = table.Column<string>(nullable: true),
-                    RequestId = table.Column<int>(nullable: true),
-                    EmployeeBaseId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Employee", x => x.EmployeeId);
-                    table.ForeignKey(
-                        name: "FK_Employee_EmployeeBase_EmployeeBaseId",
-                        column: x => x.EmployeeBaseId,
-                        principalTable: "EmployeeBase",
-                        principalColumn: "EmployeeBaseId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Employee_Request_RequestId",
-                        column: x => x.RequestId,
-                        principalTable: "Request",
-                        principalColumn: "RequestId",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "ProjectId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -197,7 +202,7 @@ namespace BTApp.Migrations
                     RouteType = table.Column<int>(nullable: false),
                     DepartureTime = table.Column<DateTime>(nullable: false),
                     ArrivalTime = table.Column<DateTime>(nullable: false),
-                    EmployeeId = table.Column<int>(nullable: true),
+                    EmployeeId = table.Column<int>(nullable: false),
                     RequestId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -208,7 +213,7 @@ namespace BTApp.Migrations
                         column: x => x.EmployeeId,
                         principalTable: "Employee",
                         principalColumn: "EmployeeId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Ticket_Request_RequestId",
                         column: x => x.RequestId,
@@ -221,21 +226,21 @@ namespace BTApp.Migrations
                 name: "EmployeeRouteAssign",
                 columns: table => new
                 {
-                    EmployeeID = table.Column<int>(nullable: false),
-                    RouteID = table.Column<int>(nullable: false)
+                    EmployeeId = table.Column<int>(nullable: false),
+                    RouteId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EmployeeRouteAssign", x => new { x.EmployeeID, x.RouteID });
+                    table.PrimaryKey("PK_EmployeeRouteAssign", x => new { x.EmployeeId, x.RouteId });
                     table.ForeignKey(
-                        name: "FK_EmployeeRouteAssign_Employee_EmployeeID",
-                        column: x => x.EmployeeID,
+                        name: "FK_EmployeeRouteAssign_Employee_EmployeeId",
+                        column: x => x.EmployeeId,
                         principalTable: "Employee",
                         principalColumn: "EmployeeId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EmployeeRouteAssign_Route_RouteID",
-                        column: x => x.RouteID,
+                        name: "FK_EmployeeRouteAssign_Route_RouteId",
+                        column: x => x.RouteId,
                         principalTable: "Route",
                         principalColumn: "RouteId",
                         onDelete: ReferentialAction.Cascade);
@@ -244,32 +249,33 @@ namespace BTApp.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Employee_EmployeeBaseId",
                 table: "Employee",
-                column: "EmployeeBaseId");
+                column: "EmployeeBaseId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Employee_RequestId",
-                table: "Employee",
-                column: "RequestId");
+                name: "IX_EmployeeBaseProjectAssign_EmployeeId",
+                table: "EmployeeBaseProjectAssign",
+                column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmployeeProjectAssign_EmployeeBaseId",
-                table: "EmployeeProjectAssign",
-                column: "EmployeeBaseId");
+                name: "IX_EmployeeBaseProjectAssign_ProjectId",
+                table: "EmployeeBaseProjectAssign",
+                column: "ProjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmployeeProjectAssign_ProjectID",
-                table: "EmployeeProjectAssign",
-                column: "ProjectID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_EmployeeRouteAssign_RouteID",
+                name: "IX_EmployeeRouteAssign_RouteId",
                 table: "EmployeeRouteAssign",
-                column: "RouteID");
+                column: "RouteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Project_ManagerEmployeeBaseId",
                 table: "Project",
                 column: "ManagerEmployeeBaseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Request_DeclarerEmployeeBaseId",
+                table: "Request",
+                column: "DeclarerEmployeeBaseId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Request_ManagerEmployeeBaseId",
@@ -282,9 +288,9 @@ namespace BTApp.Migrations
                 column: "OfficeManagerEmployeeBaseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Request_ProjectID",
+                name: "IX_Request_ProjectId",
                 table: "Request",
-                column: "ProjectID");
+                column: "ProjectId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Route_RequestId",
@@ -292,14 +298,15 @@ namespace BTApp.Migrations
                 column: "RequestId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Subproject_ProjectID",
+                name: "IX_Subproject_ProjectId",
                 table: "Subproject",
-                column: "ProjectID");
+                column: "ProjectId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ticket_EmployeeId",
                 table: "Ticket",
-                column: "EmployeeId");
+                column: "EmployeeId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ticket_RequestId",
@@ -310,7 +317,7 @@ namespace BTApp.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "EmployeeProjectAssign");
+                name: "EmployeeBaseProjectAssign");
 
             migrationBuilder.DropTable(
                 name: "EmployeeRouteAssign");
