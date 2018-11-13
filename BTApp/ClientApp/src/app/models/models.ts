@@ -42,9 +42,9 @@ export class Request {
   budget: number;
   cost: number;
   status: string;
-  declarerEmployeeBaseId: number;
-  managerEmployeeBaseId: number;
-  officeManagerEmployeeBaseId: number;
+  declarerId: number;
+  managerId: number;
+  officeManagerId: number;
   projectId: number;
   subprojectId: number;
 }

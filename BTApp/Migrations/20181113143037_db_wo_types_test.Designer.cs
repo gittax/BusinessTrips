@@ -4,14 +4,16 @@ using BTApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BTApp.Migrations
 {
     [DbContext(typeof(BusinessTripContext))]
-    partial class BusinessTripContextModelSnapshot : ModelSnapshot
+    [Migration("20181113143037_db_wo_types_test")]
+    partial class db_wo_types_test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -135,7 +137,7 @@ namespace BTApp.Migrations
 
                     b.Property<int>("Status");
 
-                    b.Property<int>("SubprojectId");
+                    b.Property<int>("Subproject");
 
                     b.HasKey("RequestId");
 

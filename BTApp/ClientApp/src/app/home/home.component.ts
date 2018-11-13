@@ -61,6 +61,10 @@ export class HomeComponent {
 
   check() {
     this.ngOnInit();
+    console.log(this.employeesBase);
+    console.log(this.projects);
+    console.log(this.subprojects);
+    console.log(this.employeesBase[this.requests[0].declarerId-1].name);
     //console.log(this.employeesBase);
     //console.log(this.declarer);
   }

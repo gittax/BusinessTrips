@@ -25,29 +25,29 @@
     <tr *ngFor="let request of requests">
       <td>{{ request.requestId }}</td>
       <td>{{ request.date }}</td>
-      <td>{{ employeesBase[request.declarerEmployeeBaseId].name }}</td>
-      <td>{{ projects[request.projectId].name }}</td>
-      <td>{{ subprojects[request.subprojectId].name }}</td>
+      <td>{{ employeesBase[request.declarerId-1].name }}</td>
+      <td>{{ projects[request.projectId-1].name }}</td>
+      <td>{{ subprojects[request.subprojectId-1].name }}</td>
       <td>{{ request.requestNumber }}</td>
       <td>{{ request.budget }}</td>
       <td>{{ request.cost }}</td>
-      <td>{{ employeesBase[request.managerEmployeeBaseId].name }}</td>
+      <td>{{ employeesBase[request.managerId-1].name }}</td>
       <td>{{ request.status }}</td>
-      <td>{{ employeesBase[request.officeManagerEmployeeBaseId].name }}</td>
+      <td>{{ employeesBase[request.officeManagerId-1].name }}</td>
       <td><button (click)="deleteRequest(request.requestId)">Del</button></td>
     </tr>
     <tr>
       <td></td>
       <td><input type="date" [(ngModel)]="newRequest.date"></td>
-      <td><select [(ngModel)]="newRequest.declarerEmployeeBaseId"> <option *ngFor="let emp of employeesBase" [value]="emp.employeeBaseId">{{emp.name}}</option></select></td>
+      <td><select [(ngModel)]="newRequest.declarerId"> <option *ngFor="let emp of employeesBase" [value]="emp.employeeBaseId">{{emp.name}}</option></select></td>
       <td><select [(ngModel)]="newRequest.projectId"> <option *ngFor="let prj of projects" [value]="prj.projectId">{{prj.name}}</option></select></td>
       <td><select [(ngModel)]="newRequest.subprojectId"> <option *ngFor="let sprj of subprojects" [value]="sprj.subprojectId">{{sprj.name}}</option></select></td>
       <td><input [(ngModel)]="newRequest.requestNumber"></td>
       <td><input [(ngModel)]="newRequest.budget"></td>
       <td><input [(ngModel)]="newRequest.cost"></td>
-      <td><select [(ngModel)]="newRequest.managerEmployeeBaseId"> <option *ngFor="let emp of employeesBase" [value]="emp.employeeBaseId">{{emp.name}}</option></select></td>
+      <td><select [(ngModel)]="newRequest.managerId"> <option *ngFor="let emp of employeesBase" [value]="emp.employeeBaseId">{{emp.name}}</option></select></td>
       <td><input disabled [(ngModel)]="newRequest.status"></td>
-      <td><select [(ngModel)]="newRequest.officeManagerEmployeeBaseId"> <option *ngFor="let emp of employeesBase" [value]="emp.employeeBaseId">{{emp.name}}</option></select></td>
+      <td><select [(ngModel)]="newRequest.officeManagerId"> <option *ngFor="let emp of employeesBase" [value]="emp.employeeBaseId">{{emp.name}}</option></select></td>
       <td>
         <button *ngIf="requests" (click)='addRequest(newRequest)'>Add <i class='fas fa-plus'></i></button>
       </td>
