@@ -22,26 +22,26 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let request of requests">
+    <tr *ngFor="let request of requestViewModels">
       <td>{{ request.requestId }}</td>
       <td>{{ request.date }}</td>
-      <td>{{ employeesBase[request.declarerId-1].name }}</td>
-      <td>{{ projects[request.projectId-1].name }}</td>
-      <td>{{ subprojects[request.subprojectId-1].name }}</td>
+      <td>{{ request.declarer }}</td>
+      <td>{{ request.project }}</td>
+      <td>{{ request.subproject }}</td>
       <td>{{ request.requestNumber }}</td>
       <td>{{ request.budget }}</td>
       <td>{{ request.cost }}</td>
-      <td>{{ employeesBase[request.managerId-1].name }}</td>
+      <td>{{ request.manager }}</td>
       <td>{{ request.status }}</td>
-      <td>{{ employeesBase[request.officeManagerId-1].name }}</td>
+      <td>{{ request.officeManager }}</td>
       <td><button (click)="deleteRequest(request.requestId)">Del</button></td>
     </tr>
     <tr>
       <td></td>
       <td><input type="date" [(ngModel)]="newRequest.date"></td>
       <td><select [(ngModel)]="newRequest.declarerId"> <option *ngFor="let emp of employeesBase" [value]="emp.employeeBaseId">{{emp.name}}</option></select></td>
-      <td><select [(ngModel)]="newRequest.projectId"> <option *ngFor="let prj of projects" [value]="prj.projectId">{{prj.name}}</option></select></td>
-      <td><select [(ngModel)]="newRequest.subprojectId"> <option *ngFor="let sprj of subprojects" [value]="sprj.subprojectId">{{sprj.name}}</option></select></td>
+      <td><select [(ngModel)]="newRequest.projectId" (ngModelChange)="onChange($event)"> <option *ngFor="let prj of projects" [value]="prj.projectId">{{prj.name}}</option></select></td>
+      <td><select [(ngModel)]="newRequest.subprojectId"> <option *ngFor="let sprj of localSubprojects" [(value)]="sprj.subprojectId">{{sprj.name}}</option></select></td>
       <td><input [(ngModel)]="newRequest.requestNumber"></td>
       <td><input [(ngModel)]="newRequest.budget"></td>
       <td><input [(ngModel)]="newRequest.cost"></td>

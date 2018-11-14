@@ -36,6 +36,12 @@ var Request = /** @class */ (function () {
     return Request;
 }());
 exports.Request = Request;
+var RequestViewModel = /** @class */ (function () {
+    function RequestViewModel() {
+    }
+    return RequestViewModel;
+}());
+exports.RequestViewModel = RequestViewModel;
 var Route = /** @class */ (function () {
     function Route() {
     }

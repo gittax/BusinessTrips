@@ -49,6 +49,21 @@ export class Request {
   subprojectId: number;
 }
 
+export class RequestViewModel {
+  requestId: number;
+  requestNumber: string;
+  date: Date;
+  businessTripNumber: string;
+  budget: number;
+  cost: number;
+  status: string;
+  declarer: string;
+  manager: string;
+  officeManager: string;
+  project: string;
+  subproject: string;
+}
+
 export class Route {
   routeId: number;
   routeType: string;
