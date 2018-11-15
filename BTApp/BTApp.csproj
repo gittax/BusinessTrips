@@ -60,6 +60,20 @@
     <Compile Remove="Migrations\20181113101453_Init_v3.Designer.cs" />
     <Compile Remove="Migrations\20181113101825_Init_v4.cs" />
     <Compile Remove="Migrations\20181113101825_Init_v4.Designer.cs" />
+    <Compile Remove="Migrations\20181115112407_FKs_for_Request_entity.cs" />
+    <Compile Remove="Migrations\20181115112407_FKs_for_Request_entity.Designer.cs" />
+    <Compile Remove="Migrations\20181115112544_FKs_for_Request_entity.cs" />
+    <Compile Remove="Migrations\20181115112544_FKs_for_Request_entity.Designer.cs" />
+    <Compile Remove="Migrations\20181115115744_qoeeef.cs" />
+    <Compile Remove="Migrations\20181115115744_qoeeef.Designer.cs" />
+    <Compile Remove="Migrations\20181115120010_retrer.cs" />
+    <Compile Remove="Migrations\20181115120010_retrer.Designer.cs" />
+    <Compile Remove="Migrations\20181115120141_retrerre.cs" />
+    <Compile Remove="Migrations\20181115120141_retrerre.Designer.cs" />
+    <Compile Remove="Migrations\20181115130003_manager_test.cs" />
+    <Compile Remove="Migrations\20181115130003_manager_test.Designer.cs" />
+    <Compile Remove="Migrations\20181115131101_request_test.cs" />
+    <Compile Remove="Migrations\20181115131101_request_test.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

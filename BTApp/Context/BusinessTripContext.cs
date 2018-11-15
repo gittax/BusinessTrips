@@ -39,6 +39,8 @@ namespace BTApp.Models
                 .HasKey(c => new { c.EmployeeBaseId, c.ProjectId });
             modelBuilder.Entity<EmployeeRouteAssign>()
                 .HasKey(c => new { c.EmployeeId, c.RouteId });
+
+           // modelBuilder.Entity<Project>().HasOne(t => t.Manager).WithRequired(a => a.Project).WillCascadeOnDelete(false);
         }
     }
 }

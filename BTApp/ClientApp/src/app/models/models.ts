@@ -31,7 +31,7 @@ export class EmployeeRouteAssign {
 export class Project {
   projectId: number;
   name: string;
-  managerEmployeeBaseId: number;
+  managerId: number;
 }
 
 export class Request {

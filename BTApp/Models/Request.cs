@@ -18,11 +18,18 @@ namespace BTApp.Models
         public double Budget { get; set; }
         public double Cost { get; set; }
         public StatusType Status { get; set; }
+
         public int DeclarerId { get; set; }
+        //public EmployeeBase Declarer { get; set; }
         public int ManagerId { get; set; }
+        //public EmployeeBase Manager { get; set; }
         public int OfficeManagerId { get; set; }
-        public int ProjectId { get; set; }
-        public int SubprojectId { get; set; }
+        //public EmployeeBase OfficeManager { get; set; }
+
+        public int? ProjectId { get; set; }
+        //public Project Project { get; set; }
+        public int? SubprojectId { get; set; }
+        //public Subproject Subproject { get; set; }
     }
     public enum StatusType
     {

@@ -12,12 +12,14 @@ namespace BTApp.Models
 
         [Display(Name = "Project Name")]
         public string Name { get; set; }
-
+        
+        public int? ManagerId { get; set; }
         [Display(Name = "Project Manager")]
         public EmployeeBase Manager { get; set; }
 
         [Display(Name = "Employees")]
         public ICollection<EmployeeBaseProjectAssign> EmployeeProjectAssigns { get; set; }
         public ICollection<Subproject> Subprojects { get; set; }
+        public Request Request { get; set; }
     }
 }

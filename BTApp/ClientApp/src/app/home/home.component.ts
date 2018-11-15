@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../services/http.service';
 import { EmployeeBase, Employee, EmployeeBaseProjectAssign, EmployeeRouteAssign, Request, Project, Route, Subproject, Ticket, RequestViewModel } from '../models/models';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +25,7 @@ export class HomeComponent {
 
   ngOnInit() {
     this.i = 0;
+    this.newRequest = new Request();
     this.httpService.getEmployeeBase()
       .subscribe(result => { this.employeesBase = result; }, error => console.error(error), () => this.callback(this.employeesBase));
 
@@ -42,25 +44,22 @@ export class HomeComponent {
   addEmployeeBase(newEmployeeBase: EmployeeBase) {
     this.httpService.postEmployeeBase(newEmployeeBase)
       .subscribe(result => { console.log(result) }, error => console.error(error), () => this.ngOnInit());
-    this.ngOnInit();
   }
 
   deleteEmployeeBase(id: string) {
     this.httpService.deleteEmployeeBase(id)
       .subscribe(result => { console.log(result) }, error => console.error(error), () => this.ngOnInit());
-    this.ngOnInit();
   }
 
   addRequest(newRequest: Request) {
     this.httpService.postRequest(newRequest)
       .subscribe(result => { console.log(result) }, error => console.error(error), () => this.ngOnInit());
-    this.ngOnInit();
+    //добавить обработчик для РЕДАКТИРОВАНИЯ ManagerId в Project (отправка по Id выбранного проекта)
   }
 
   deleteRequest(id: string) {
     this.httpService.deleteRequest(id)
       .subscribe(result => { console.log(result) }, error => console.error(error), () => this.ngOnInit());
-    this.ngOnInit();
   }
 
   check() {
@@ -82,6 +81,9 @@ export class HomeComponent {
       console.log('requests.length = 0');
       return;
     }
+    var emp: EmployeeBase = new EmployeeBase();
+    var prj: Project = new Project();
+    var sprj: Subproject = new Subproject();
 
     this.requestViewModels = [];
     this.requests.forEach((request, i) => {
@@ -94,29 +96,19 @@ export class HomeComponent {
       this.requestViewModels[i].cost = request.cost;
       this.requestViewModels[i].status = request.status;
 
-      this.employeesBase.forEach((emp) => {
-        if (emp.employeeBaseId == request.declarerId) {
-          this.requestViewModels[i].declarer = emp.name;
-        }
-        if (emp.employeeBaseId == request.managerId) {
-          this.requestViewModels[i].manager = emp.name;
-        }
-        if (emp.employeeBaseId == request.officeManagerId) {
-          this.requestViewModels[i].officeManager = emp.name;
-        }
-      });
+      emp = this.employeesBase.find(x => x.employeeBaseId == request.declarerId)
+      this.requestViewModels[i].declarer = emp.name;
+      emp = this.employeesBase.find(x => x.employeeBaseId == request.managerId)
+      this.requestViewModels[i].manager = emp.name;
+      emp = this.employeesBase.find(x => x.employeeBaseId == request.officeManagerId)
+      this.requestViewModels[i].officeManager = emp.name;
 
-      this.projects.forEach((prj) => {
-        if (prj.projectId == request.projectId) {
-          this.requestViewModels[i].project = prj.name;
-        }
-      });
+      prj = this.projects.find(x => x.projectId == request.projectId)
+      this.requestViewModels[i].project = prj.name;
 
-      this.subprojects.forEach((sprj) => {
-        if (sprj.subprojectId == request.subprojectId) {
-          this.requestViewModels[i].subproject = sprj.name;
-        }
-      });
+      sprj = this.subprojects.find(x => x.subprojectId == request.subprojectId)
+      this.requestViewModels[i].subproject = sprj.name;
+      
     })
   }
 

@@ -4,14 +4,16 @@ using BTApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BTApp.Migrations
 {
     [DbContext(typeof(BusinessTripContext))]
-    partial class BusinessTripContextModelSnapshot : ModelSnapshot
+    [Migration("20181115120247_ret")]
+    partial class ret
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,13 +100,13 @@ namespace BTApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ManagerId");
+                    b.Property<int?>("ManagerEmployeeBaseId");
 
                     b.Property<string>("Name");
 
                     b.HasKey("ProjectId");
 
-                    b.HasIndex("ManagerId");
+                    b.HasIndex("ManagerEmployeeBaseId");
 
                     b.ToTable("Project");
                 });
@@ -270,7 +272,7 @@ namespace BTApp.Migrations
                 {
                     b.HasOne("BTApp.Models.EmployeeBase", "Manager")
                         .WithMany()
-                        .HasForeignKey("ManagerId");
+                        .HasForeignKey("ManagerEmployeeBaseId");
                 });
 
             modelBuilder.Entity("BTApp.Models.Request", b =>
