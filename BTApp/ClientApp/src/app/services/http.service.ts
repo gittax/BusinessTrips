@@ -45,4 +45,32 @@ export class HttpService {
   getSubproject() {
     return this.http.get<Subproject[]>(this.baseUrl + `api/Subprojects`)
   }
+
+
+
+  getRoute() {
+    return this.http.get<Route[]>(this.baseUrl + `api/Routes`)
+  }
+
+  postRoute(route: Route) {
+    return this.http.post<Route[]>(this.baseUrl + `api/Routes`, route)
+  }
+
+  deleteRoute(id: string) {
+    return this.http.delete<Route>(this.baseUrl + `api/Routes/${id}`);
+  }
+
+
+
+  getTicket() {
+    return this.http.get<Ticket[]>(this.baseUrl + `api/Tickets`)
+  }
+
+  postTicket(ticket: Ticket) {
+    return this.http.post<Ticket[]>(this.baseUrl + `api/Tickets`, ticket)
+  }
+
+  deleteTicket(id: string) {
+    return this.http.delete<Ticket>(this.baseUrl + `api/Tickets/${id}`);
+  }
 }
