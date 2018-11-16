@@ -8,13 +8,26 @@ export class EmployeeBase{
 
 export class Employee {
   employeeId: number;
+  employeeBaseId: number;
   docType: string;
   docNumber: string;
   validThrough: Date;
   gender: string;
   birthDate: Date;
   birthPlace: string;
-  employeeBaseId: number;
+  requestId: number;
+}
+
+export class EmployeeViewModel {
+  employeeId: number;
+  employeeBase: string;
+  docType: string;
+  docNumber: string;
+  validThrough: Date;
+  gender: string;
+  birthDate: Date;
+  birthPlace: string;
+  requestId: number;
 }
 
 export class EmployeeBaseProjectAssign {
@@ -67,8 +80,8 @@ export class RequestViewModel {
 export class Route {
   routeId: number;
   routeType: string;
-  departureTime: Time;
-  arrivalTime: Time;
+  departureTime: Date;
+  arrivalTime: Date;
   ticketType: string;
   departureCity: string;
   arrivalCity: string;
@@ -88,8 +101,18 @@ export class Ticket {
   ticketId: number;
   cost: number;
   routeType: string;
-  departureTime: Time;
-  arrivalTime: Time;
-  employeeId: number;
+  departureTime: Date;
+  arrivalTime: Date;
+  employeeBaseId: number;
+  requestId: number;
+}
+
+export class TicketViewModel {
+  ticketId: number;
+  cost: number;
+  routeType: string;
+  departureTime: Date;
+  arrivalTime: Date;
+  employeeBase: string;
   requestId: number;
 }

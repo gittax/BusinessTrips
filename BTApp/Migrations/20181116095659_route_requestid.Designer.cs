@@ -4,14 +4,16 @@ using BTApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BTApp.Migrations
 {
     [DbContext(typeof(BusinessTripContext))]
-    partial class BusinessTripContextModelSnapshot : ModelSnapshot
+    [Migration("20181116095659_route_requestid")]
+    partial class route_requestid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,16 +39,12 @@ namespace BTApp.Migrations
 
                     b.Property<int>("Gender");
 
-                    b.Property<int?>("RequestId");
-
                     b.Property<DateTime>("ValidThrough");
 
                     b.HasKey("EmployeeId");
 
                     b.HasIndex("EmployeeBaseId")
                         .IsUnique();
-
-                    b.HasIndex("RequestId");
 
                     b.ToTable("Employee");
                 });
@@ -238,10 +236,6 @@ namespace BTApp.Migrations
                         .WithOne("Employee")
                         .HasForeignKey("BTApp.Models.Employee", "EmployeeBaseId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("BTApp.Models.Request", "Request")
-                        .WithMany()
-                        .HasForeignKey("RequestId");
                 });
 
             modelBuilder.Entity("BTApp.Models.EmployeeBaseProjectAssign", b =>

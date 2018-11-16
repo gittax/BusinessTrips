@@ -1,3 +1,44 @@
-<p>
-  tickets works!
-</p>
+<h1>Tickets</h1>
+
+<p>Fetching requests from the DB.</p>
+
+<p *ngIf="!tickets"><em>Loading...</em></p>
+
+<table class='table' *ngIf="tickets">
+  <thead>
+    <tr>
+      <th>ID Билета</th>
+      <th>Стоимость</th>
+      <th>Сотрудник</th>
+      <th>Тип маршрута</th>
+      <th>Дата отправления</th>
+      <th>Дата прибытия</th>
+      <th>ID заявки</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let ticket of ticketViewModels">
+      <td>{{ ticket.ticketId }}</td>
+      <td>{{ ticket.cost }}</td>
+      <td>{{ ticket.employeeBase }}</td>
+      <td>{{ ticket.routeType }}</td>
+      <td>{{ ticket.departureTime }}</td>
+      <td>{{ ticket.arrivalTime }}</td>
+      <td>{{ ticket.requestId }}</td>
+      <td><button (click)="deleteTicket(ticket.ticketId)">Del</button></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input [(ngModel)]="newTicket.cost" required></td>
+      <td><select [(ngModel)]="newTicket.employeeBaseId" required><option *ngFor="let emp of employeesBase" [value]="emp.employeeBaseId">{{emp.name}}</option></select></td>
+      <td><input [(ngModel)]="newTicket.routeType" required></td>
+      <td><input type="date" [(ngModel)]="newTicket.departureTime" required></td>
+      <td><input type="date" [(ngModel)]="newTicket.arrivalTime" required></td>
+      <td><input [(ngModel)]="newTicket.requestId" required></td>
+      <td>
+        <button *ngIf="tickets" type="submit" (click)='addTicket(newTicket)'>Add <i class='fas fa-plus'></i></button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<button (click)='check()'>Check <i class='fas fa-plus'></i></button>

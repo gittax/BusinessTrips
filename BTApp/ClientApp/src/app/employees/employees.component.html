@@ -9,7 +9,6 @@
     <tr>
       <th>ID</th>
       <th>Имя</th>
-      <th>Код сотрудника</th>
       <th>Тип документа</th>
       <th>Номер документа</th>
       <th>Действителен до</th>
@@ -20,17 +19,31 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let employee of employees">
+    <tr *ngFor="let employee of employeeViewModels">
       <td>{{ employee.employeeId }}</td>
-      <td>{{ employee.employeeBase.name }}</td>
-      <td>{{ employee.employeeBase.code }}</td>
+      <td>{{ employee.employeeBase }}</td>
       <td>{{ employee.docType }}</td>
       <td>{{ employee.docNumber }}</td>
       <td>{{ employee.validThrough }}</td>
       <td>{{ employee.gender }}</td>
       <td>{{ employee.birthDate }}</td>
       <td>{{ employee.birthPlace }}</td>
-      <td>{{ employee.request.requestId }}</td>
+      <td>{{ employee.requestId }}</td>
+      <td><button (click)="deleteEmployee(employee.employeeId)">Del</button></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><select [(ngModel)]="newEmployee.employeeBaseId" required><option *ngFor="let emp of employeesBase" [value]="emp.employeeBaseId">{{emp.name}}</option></select></td>
+      <td><input [(ngModel)]="newEmployee.docType" required></td>
+      <td><input [(ngModel)]="newEmployee.docNumber" required></td>
+      <td><input type="date" [(ngModel)]="newEmployee.validThrough" required></td>
+      <td><input [(ngModel)]="newEmployee.gender" required></td>
+      <td><input type="date" [(ngModel)]="newEmployee.birthDate" required></td>
+      <td><input [(ngModel)]="newEmployee.birthPlace" required></td>
+      <td><select [(ngModel)]="newEmployee.requestId" required><option *ngFor="let rqst of requests" [(value)]="rqst.requestId">{{rqst.requestId}}</option></select></td>
+      <td>
+        <button *ngIf="employees" type="submit" (click)='addEmployee(newEmployee)'>Add <i class='fas fa-plus'></i></button>
+      </td>
     </tr>
   </tbody>
 </table>

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../services/http.service';
 import { EmployeeBase, Employee, EmployeeBaseProjectAssign, EmployeeRouteAssign, Request, Project, Route, Subproject, Ticket, RequestViewModel } from '../models/models';
-import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-home',
@@ -24,8 +23,10 @@ export class HomeComponent {
   constructor(private httpService: HttpService) { }
 
   ngOnInit() {
+
     this.i = 0;
     this.newRequest = new Request();
+
     this.httpService.getEmployeeBase()
       .subscribe(result => { this.employeesBase = result; }, error => console.error(error), () => this.callback(this.employeesBase));
 

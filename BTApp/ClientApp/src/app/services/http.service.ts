@@ -24,6 +24,20 @@ export class HttpService {
 
 
 
+  getEmployee() {
+    return this.http.get<Employee[]>(this.baseUrl + `api/Employees`);
+  }
+
+  postEmployee(employee: Employee) {
+    return this.http.post<Employee>(this.baseUrl + `api/Employees`, employee);
+  }
+
+  deleteEmployee(id: string) {
+    return this.http.delete<Employee>(this.baseUrl + `api/Employees/${id}`);
+  }
+
+
+
   getRequest() {
     return this.http.get<Request[]>(this.baseUrl + `api/Requests`)
   }

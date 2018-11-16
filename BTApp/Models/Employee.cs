@@ -29,6 +29,9 @@ namespace BTApp.Models
         public int EmployeeBaseId { get; set; }
         public virtual EmployeeBase EmployeeBase { get; set; }
 
+        public int? RequestId { get; set; }
+        public Request Request { get; set; }
+
         public virtual Ticket Ticket { get; set; }
 
         public ICollection<EmployeeRouteAssign> EmployeeRouteAssigns { get; set; }

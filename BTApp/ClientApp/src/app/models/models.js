@@ -12,6 +12,12 @@ var Employee = /** @class */ (function () {
     return Employee;
 }());
 exports.Employee = Employee;
+var EmployeeViewModel = /** @class */ (function () {
+    function EmployeeViewModel() {
+    }
+    return EmployeeViewModel;
+}());
+exports.EmployeeViewModel = EmployeeViewModel;
 var EmployeeBaseProjectAssign = /** @class */ (function () {
     function EmployeeBaseProjectAssign() {
     }
@@ -60,4 +66,10 @@ var Ticket = /** @class */ (function () {
     return Ticket;
 }());
 exports.Ticket = Ticket;
+var TicketViewModel = /** @class */ (function () {
+    function TicketViewModel() {
+    }
+    return TicketViewModel;
+}());
+exports.TicketViewModel = TicketViewModel;
 //# sourceMappingURL=models.js.map

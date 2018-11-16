@@ -25,6 +25,7 @@ namespace BTApp.Models
         public string FlightNumber { get; set; }
         public ClassType ClassType { get; set; }
         public double Budget { get; set; }
+        public int? RequestId { get; set; }
         public virtual Request Request { get; set; }
         public ICollection<EmployeeRouteAssign> EmployeeRouteAssigns { get; set; }
     }

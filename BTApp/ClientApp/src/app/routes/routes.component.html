@@ -1,3 +1,56 @@
-<p>
-  routes works!
-</p>
+<h1>Routes</h1>
+
+<p>Fetching requests from the DB.</p>
+
+<p *ngIf="!routes"><em>Loading...</em></p>
+
+<table class='table' *ngIf="routes">
+  <thead>
+    <tr>
+      <th>ID маршрута</th>
+      <th>Тип маршрута</th>
+      <th>Дата отправления</th>
+      <th>Дата прибытия</th>
+      <th>Тип билета</th>
+      <th>Город отправления</th>
+      <th>Город назначения</th>
+      <th>Рейс/Поезд</th>
+      <th>Класс</th>
+      <th>Бюджет</th>
+      <th>ID заявки</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let route of routes">
+      <td>{{ route.routeId }}</td>
+      <td>{{ route.routeType }}</td>
+      <td>{{ route.departureTime }}</td>
+      <td>{{ route.arrivalTime }}</td>
+      <td>{{ route.ticketType }}</td>
+      <td>{{ route.departureCity }}</td>
+      <td>{{ route.arrivalCity }}</td>
+      <td>{{ route.flightNumber }}</td>
+      <td>{{ route.classType }}</td>
+      <td>{{ route.budget }}</td>
+      <td>{{ route.requestId }}</td>
+      <td><button (click)="deleteRoute(route.routeId)">Del</button></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input [(ngModel)]="newRoute.routeType" required></td>
+      <td><input type="date" [(ngModel)]="newRoute.departureTime" required></td>
+      <td><input type="date" [(ngModel)]="newRoute.arrivalTime" required></td>
+      <td><input [(ngModel)]="newRoute.ticketType" required></td>
+      <td><input [(ngModel)]="newRoute.departureCity" required></td>
+      <td><input [(ngModel)]="newRoute.arrivalCity" required></td>
+      <td><input [(ngModel)]="newRoute.flightNumber" required></td>
+      <td><input [(ngModel)]="newRoute.classType" required></td>
+      <td><input [(ngModel)]="newRoute.budget" required></td>
+      <td><select [(ngModel)]="newRoute.requestId" required> <option *ngFor="let rqst of requests" [(value)]="rqst.requestId">{{rqst.requestId}}</option></select></td>
+      <td>
+        <button *ngIf="routes" type="submit" (click)='addRoute(newRoute)'>Add <i class='fas fa-plus'></i></button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<button (click)='check()'>Check <i class='fas fa-plus'></i></button>
