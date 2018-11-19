@@ -6,6 +6,13 @@ export class EmployeeBase{
   name: string;
 }
 
+export class EmployeeBaseViewModel {
+  employeeBaseId: number;
+  employeeId: number;
+  code: string;
+  name: string;
+}
+
 export class Employee {
   employeeId: number;
   employeeBaseId: number;
@@ -103,7 +110,7 @@ export class Ticket {
   routeType: string;
   departureTime: Date;
   arrivalTime: Date;
-  employeeBaseId: number;
+  employeeId: number;
   requestId: number;
 }
 
@@ -113,6 +120,6 @@ export class TicketViewModel {
   routeType: string;
   departureTime: Date;
   arrivalTime: Date;
-  employeeBase: string;
+  employee: string;
   requestId: number;
 }

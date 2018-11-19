@@ -20,7 +20,7 @@
     <tr *ngFor="let ticket of ticketViewModels">
       <td>{{ ticket.ticketId }}</td>
       <td>{{ ticket.cost }}</td>
-      <td>{{ ticket.employeeBase }}</td>
+      <td>{{ ticket.employee }}</td>
       <td>{{ ticket.routeType }}</td>
       <td>{{ ticket.departureTime }}</td>
       <td>{{ ticket.arrivalTime }}</td>
@@ -30,11 +30,11 @@
     <tr>
       <td></td>
       <td><input [(ngModel)]="newTicket.cost" required></td>
-      <td><select [(ngModel)]="newTicket.employeeBaseId" required><option *ngFor="let emp of employeesBase" [value]="emp.employeeBaseId">{{emp.name}}</option></select></td>
+      <td><select [(ngModel)]="newTicket.employeeId" required><option *ngFor="let emp of employeeBaseViewModels" [(value)]="emp.employeeId">{{emp.name}}</option></select></td>
       <td><input [(ngModel)]="newTicket.routeType" required></td>
       <td><input type="date" [(ngModel)]="newTicket.departureTime" required></td>
       <td><input type="date" [(ngModel)]="newTicket.arrivalTime" required></td>
-      <td><input [(ngModel)]="newTicket.requestId" required></td>
+      <td><select [(ngModel)]="newTicket.requestId" required><option *ngFor="let rqst of requests" [(value)]="rqst.requestId">{{rqst.requestId}}</option></select></td>
       <td>
         <button *ngIf="tickets" type="submit" (click)='addTicket(newTicket)'>Add <i class='fas fa-plus'></i></button>
       </td>

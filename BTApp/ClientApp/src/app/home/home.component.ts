@@ -55,8 +55,15 @@ export class HomeComponent {
   addRequest(newRequest: Request) {
     this.httpService.postRequest(newRequest)
       .subscribe(result => { console.log(result) }, error => console.error(error), () => this.ngOnInit());
+    //this.datePipe.transform(newRequest.date, 'yyyy/MM/dd');
     //добавить обработчик для РЕДАКТИРОВАНИЯ ManagerId в Project (отправка по Id выбранного проекта)
   }
+
+  /*
+  editRequest(id: string, request: Request) {
+    this.httpService.putRequest(id, request)
+      .subscribe(result => { console.log(result) }, error => console.error(error), () => this.ngOnInit())
+  }*/
 
   deleteRequest(id: string) {
     this.httpService.deleteRequest(id)
@@ -105,24 +112,41 @@ export class HomeComponent {
       this.requestViewModels[i].officeManager = emp.name;
 
       prj = this.projects.find(x => x.projectId == request.projectId)
-      this.requestViewModels[i].project = prj.name;
+      if (prj) {
+        this.requestViewModels[i].project = prj.name;
+      }
 
       sprj = this.subprojects.find(x => x.subprojectId == request.subprojectId)
-      this.requestViewModels[i].subproject = sprj.name;
-      
+      if (sprj) {
+        this.requestViewModels[i].subproject = sprj.name;
+      }
     })
   }
 
-  onChange(newValue) {
-    var i = 0;
+  /*
+  goEdit(id: string) {
+    var editButton = document.getElementsByClassName('edit');
+    var addButton = document.getElementsByClassName('add');
+    editButton[0].removeAttribute('hidden');
+    addButton[0].setAttribute('hidden', '');
+
+    var nid = +id;
+    
+    var rqst = this.requests.find(x => x.requestId == nid)
+
+   // this.newRequest = rqst;
+  }
+  */
+
+  onChange(projectId) {
     this.localSubprojects = [];
-    console.log(newValue);
-    this.newRequest.projectId = newValue;
-    this.subprojects.forEach((sprj) => {
-      if (sprj.projectId == newValue) {
+    console.log(projectId);
+    projectId = +projectId;
+    this.newRequest.projectId = projectId;
+    this.subprojects.forEach((sprj, i) => {
+      if (sprj.projectId == projectId) {
         this.localSubprojects.push(new Subproject());
-        this.localSubprojects[i] = sprj;
-        i++;
+        this.localSubprojects[this.localSubprojects.length-1] = sprj;
       }
     });
     // ... do other stuff here ...

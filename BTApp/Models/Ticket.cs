@@ -22,6 +22,7 @@ namespace BTApp.Models
 
         public int EmployeeId { get; set; }
         public virtual Employee Employee { get; set; }
+        public int? RequestId { get; set; }
         public virtual Request Request { get; set; }
     }
 }

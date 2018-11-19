@@ -7,7 +7,7 @@ export class HttpService {
   private baseUrl: string;
 
   constructor(private http: HttpClient, @Inject('BASE_URL') url: string) {
-    this.baseUrl = url
+    this.baseUrl = url;
   }
 
   getEmployeeBase() {
@@ -32,6 +32,11 @@ export class HttpService {
     return this.http.post<Employee>(this.baseUrl + `api/Employees`, employee);
   }
 
+  putEmployee(id: string, employee: Employee) {
+    return this.http.put<Employee>(this.baseUrl + `api/Employee/${id}`, employee);
+
+  }
+
   deleteEmployee(id: string) {
     return this.http.delete<Employee>(this.baseUrl + `api/Employees/${id}`);
   }
@@ -44,6 +49,11 @@ export class HttpService {
 
   postRequest(request: Request) {
     return this.http.post<Request>(this.baseUrl + `api/Requests`, request);
+  }
+
+  putRequest(id: string, request: Request) {
+    return this.http.put<Request>(this.baseUrl + `api/Requests/${id}`, request);
+
   }
 
   deleteRequest(id: string) {
@@ -67,7 +77,12 @@ export class HttpService {
   }
 
   postRoute(route: Route) {
-    return this.http.post<Route[]>(this.baseUrl + `api/Routes`, route)
+    return this.http.post<Route>(this.baseUrl + `api/Routes`, route)
+  }
+
+  putRoute(id: string, route: Route) {
+    return this.http.put<Route>(this.baseUrl + `api/Route/${id}`, route);
+
   }
 
   deleteRoute(id: string) {
@@ -81,7 +96,12 @@ export class HttpService {
   }
 
   postTicket(ticket: Ticket) {
-    return this.http.post<Ticket[]>(this.baseUrl + `api/Tickets`, ticket)
+    return this.http.post<Ticket>(this.baseUrl + `api/Tickets`, ticket)
+  }
+
+  putTicket(id: string, ticket: Ticket) {
+    return this.http.put<Ticket>(this.baseUrl + `api/Ticket/${id}`, ticket);
+
   }
 
   deleteTicket(id: string) {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../services/http.service';
-import { EmployeeBase, Employee, EmployeeBaseProjectAssign, EmployeeRouteAssign, Request, Project, Route, Subproject, Ticket, TicketViewModel} from '../models/models';
+import { EmployeeBase, Employee, EmployeeBaseProjectAssign, EmployeeRouteAssign, Request, Project, Route, Subproject, Ticket, TicketViewModel, EmployeeBaseViewModel} from '../models/models';
 
 @Component({
   selector: 'app-tickets',
@@ -18,15 +18,16 @@ export class TicketsComponent implements OnInit {
   done: boolean = false;
 
   ticketViewModels: TicketViewModel[];
+  employeeBaseViewModels: EmployeeBaseViewModel[];
 
-  newEmployee: Employee = new Employee();
+  newTicket: Ticket = new Ticket();
 
   constructor(private httpService: HttpService) { }
 
   ngOnInit() {
 
     this.i = 0;
-    this.newEmployee = new Employee();
+    this.newTicket = new Ticket();
 
     this.httpService.getRequest()
       .subscribe(result => { this.requests = result; }, error => console.error(error), () => this.callback(this.requests));
@@ -65,14 +66,27 @@ export class TicketsComponent implements OnInit {
   }
 
   constructArray() {
+
+    var emp: Employee = new Employee();
+    var empb: EmployeeBase = new EmployeeBase();
+
+    this.employeeBaseViewModels = [];
+    this.employees.forEach((employee, i) => {
+      this.employeeBaseViewModels.push(new EmployeeBaseViewModel());
+
+      this.employeeBaseViewModels[i].employeeId = employee.employeeId;
+      empb = this.employeesBase.find(x => x.employeeBaseId == employee.employeeBaseId);
+      this.employeeBaseViewModels[i].name = empb.name;
+      this.employeeBaseViewModels[i].code = empb.code;
+      this.employeeBaseViewModels[i].employeeBaseId = empb.employeeBaseId;
+    })
+
     if (!this.tickets.length) {
       this.ticketViewModels = [];
       console.log('tickets.length = 0');
       return;
     }
 
-    var empb: EmployeeBase = new EmployeeBase();
-    var emp: Employee = new Employee();
 
     this.ticketViewModels = [];
     this.tickets.forEach((ticket, i) => {
@@ -83,9 +97,10 @@ export class TicketsComponent implements OnInit {
       this.ticketViewModels[i].departureTime = ticket.departureTime;
       this.ticketViewModels[i].arrivalTime = ticket.arrivalTime;
       this.ticketViewModels[i].requestId = ticket.requestId;
-      
-      empb = this.employeesBase.find(x => x.employeeBaseId == ticket.employeeBaseId)
-      this.ticketViewModels[i].employeeBase = empb.name;
+
+      emp = this.employees.find(x => x.employeeId == ticket.employeeId)
+      empb = this.employeesBase.find(x => x.employeeBaseId == emp.employeeBaseId)
+      this.ticketViewModels[i].employee = empb.name;
     });
   }
 }

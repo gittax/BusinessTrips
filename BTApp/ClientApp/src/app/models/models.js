@@ -6,6 +6,12 @@ var EmployeeBase = /** @class */ (function () {
     return EmployeeBase;
 }());
 exports.EmployeeBase = EmployeeBase;
+var EmployeeBaseViewModel = /** @class */ (function () {
+    function EmployeeBaseViewModel() {
+    }
+    return EmployeeBaseViewModel;
+}());
+exports.EmployeeBaseViewModel = EmployeeBaseViewModel;
 var Employee = /** @class */ (function () {
     function Employee() {
     }

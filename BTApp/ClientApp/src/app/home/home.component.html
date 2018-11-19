@@ -33,23 +33,23 @@
       <td>{{ request.manager }}</td>
       <td>{{ request.status }}</td>
       <td>{{ request.officeManager }}</td>
-      <td><button (click)="deleteRequest(request.requestId)">Del</button></td>
+      <td><button (click)="deleteRequest(request.requestId)">Del</button> <button (click)="goEdit(request.requestId)">Edit</button></td>
     </tr>
     <tr>
       <td></td>
       <td><input type="date" [(ngModel)]="newRequest.date" required></td>
       <td><select [(ngModel)]="newRequest.declarerId" required> <option *ngFor="let emp of employeesBase" [value]="emp.employeeBaseId">{{emp.name}}</option></select></td>
       <td><select [(ngModel)]="newRequest.projectId" (ngModelChange)="onChange($event)" required> <option *ngFor="let prj of projects" [value]="prj.projectId">{{prj.name}}</option></select></td>
-      <td><select [(ngModel)]="newRequest.subprojectId" required> <option *ngFor="let sprj of localSubprojects" [(value)]="sprj.subprojectId">{{sprj.name}}</option></select></td>
+      <td><select [(ngModel)]="newRequest.subprojectId" required> <option *ngFor="let sprj of localSubprojects" [value]="sprj.subprojectId">{{sprj.name}}</option></select></td>
       <td><input type="text" [(ngModel)]="newRequest.requestNumber" required></td>
       <td><input type="number" [(ngModel)]="newRequest.budget" required></td>
       <td><input type="number" [(ngModel)]="newRequest.cost" required></td>
-      <td><select [(ngModel)]="newRequest.managerId" required> <option *ngFor="let emp of employeesBase" [value]="emp.employeeBaseId">{{emp.name}}</option></select></td>
+      <td><select [(ngModel)]="newRequest.managerId" required> <option *ngFor="let emp of employeesBase" [(value)]="emp.employeeBaseId">{{emp.name}}</option></select></td>
       <td><input disabled [(ngModel)]="newRequest.status"></td>
-      <td><select [(ngModel)]="newRequest.officeManagerId" required> <option *ngFor="let emp of employeesBase" [value]="emp.employeeBaseId">{{emp.name}}</option></select></td>
+      <td><select [(ngModel)]="newRequest.officeManagerId" required> <option *ngFor="let emp of employeesBase" [(value)]="emp.employeeBaseId">{{emp.name}}</option></select></td>
       <td>
-        <input type="submit" value="test" (click)="addRequest(newRequest)" />
-        <button *ngIf="requests" type="submit" (click)='addRequest(newRequest)'>Add <i class='fas fa-plus'></i></button>
+        <button class="add" *ngIf="requests" type="submit" (click)='addRequest(newRequest)'>Add <i class='fas fa-plus'></i></button>
+        <button class="edit" *ngIf="requests" type="submit" (click)='editRequest(newRequest)' hidden>Submit</button>
       </td>
     </tr>
   </tbody>
