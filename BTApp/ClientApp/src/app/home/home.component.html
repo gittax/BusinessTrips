@@ -49,7 +49,7 @@
       <td><select [(ngModel)]="newRequest.officeManagerId" required> <option *ngFor="let emp of employeesBase" [(value)]="emp.employeeBaseId">{{emp.name}}</option></select></td>
       <td>
         <button class="add" *ngIf="requests" type="submit" (click)='addRequest(newRequest)'>Add <i class='fas fa-plus'></i></button>
-        <button class="edit" *ngIf="requests" type="submit" (click)='editRequest(newRequest)' hidden>Submit</button>
+        <button class="edit" *ngIf="requests" type="submit" (click)='editRequest(newRequest.requestId, newRequest)' hidden>Submit</button>
       </td>
     </tr>
   </tbody>

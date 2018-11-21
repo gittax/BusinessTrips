@@ -59,11 +59,15 @@ export class HomeComponent {
     //добавить обработчик для РЕДАКТИРОВАНИЯ ManagerId в Project (отправка по Id выбранного проекта)
   }
 
-  /*
+  
   editRequest(id: string, request: Request) {
     this.httpService.putRequest(id, request)
-      .subscribe(result => { console.log(result) }, error => console.error(error), () => this.ngOnInit())
-  }*/
+      .subscribe(result => { console.log(result) }, error => console.error(error), () => this.ngOnInit());
+    var editButton = document.getElementsByClassName('edit');
+    var addButton = document.getElementsByClassName('add');
+    addButton[0].removeAttribute('hidden');
+    editButton[0].setAttribute('hidden', '');
+  }
 
   deleteRequest(id: string) {
     this.httpService.deleteRequest(id)
@@ -124,8 +128,7 @@ export class HomeComponent {
 
     console.log(this.localSubprojects);
   }
-
-  /*
+  
   goEdit(id: string) {
     var editButton = document.getElementsByClassName('edit');
     var addButton = document.getElementsByClassName('add');
@@ -134,11 +137,13 @@ export class HomeComponent {
 
     var nid = +id;
     
-    var rqst = this.requests.find(x => x.requestId == nid)
-
-   // this.newRequest = rqst;
+    var rqst: Request = this.requests.find(x => x.requestId == nid)
+    
+    this.newRequest = rqst;
+    this.onChange(rqst.projectId);
+    console.log(rqst);
+    console.log(this.newRequest);
   }
-  */
 
   onChange(projectId) {
     this.localSubprojects = [];
@@ -149,7 +154,7 @@ export class HomeComponent {
       if (sprj.projectId == projectId) {
         this.localSubprojects.push(new Subproject());
         this.localSubprojects[this.localSubprojects.length - 1] = sprj;
-        this.localSubprojects[this.localSubprojects.length - 1].subprojectId = sprj.subprojectId;
+        //this.localSubprojects[this.localSubprojects.length - 1].subprojectId = sprj.subprojectId;
       }
     });
     console.log(this.localSubprojects);
