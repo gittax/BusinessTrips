@@ -8,7 +8,7 @@ import { EmployeeBase, Employee, EmployeeBaseProjectAssign, EmployeeRouteAssign,
   providers: [HttpService]
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   private i: number;
   public requests: Request[];
   public requestViewModels: RequestViewModel[];
@@ -21,6 +21,10 @@ export class HomeComponent {
   newRequest: Request = new Request();
 
   constructor(private httpService: HttpService) { }
+
+  items: RequestViewModel[] = this.requestViewModels;
+
+  pageOfItems: RequestViewModel[];
 
   ngOnInit() {
 
@@ -58,7 +62,6 @@ export class HomeComponent {
     //this.datePipe.transform(newRequest.date, 'yyyy/MM/dd');
     //добавить обработчик для РЕДАКТИРОВАНИЯ ManagerId в Project (отправка по Id выбранного проекта)
   }
-
   
   editRequest(id: string, request: Request) {
     this.httpService.putRequest(id, request)
@@ -125,8 +128,6 @@ export class HomeComponent {
         this.requestViewModels[i].subproject = sprj.name;
       }
     })
-
-    console.log(this.localSubprojects);
   }
   
   goEdit(id: string) {
@@ -141,8 +142,6 @@ export class HomeComponent {
     
     this.newRequest = rqst;
     this.onChange(rqst.projectId);
-    console.log(rqst);
-    console.log(this.newRequest);
   }
 
   onChange(projectId) {
@@ -157,9 +156,11 @@ export class HomeComponent {
         //this.localSubprojects[this.localSubprojects.length - 1].subprojectId = sprj.subprojectId;
       }
     });
-    console.log(this.localSubprojects);
     // ... do other stuff here ...
   }
 
-  //реализовать через типы БД с помощью [ngValue]
+  onChangePage(pageOfItems: RequestViewModel[]) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
+  }
 }

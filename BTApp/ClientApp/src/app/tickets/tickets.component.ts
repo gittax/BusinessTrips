@@ -47,6 +47,15 @@ export class TicketsComponent implements OnInit {
       .subscribe(result => { console.log(result) }, error => console.error(error), () => this.ngOnInit());
   }
 
+  editTicket(id: string, ticket: Ticket) {
+    this.httpService.putTicket(id, ticket)
+      .subscribe(result => { console.log(result) }, error => console.error(error), () => this.ngOnInit());
+    var editButton = document.getElementsByClassName('edit');
+    var addButton = document.getElementsByClassName('add');
+    addButton[0].removeAttribute('hidden');
+    editButton[0].setAttribute('hidden', '');
+  }
+
   deleteTicket(id: string) {
     this.httpService.deleteTicket(id)
       .subscribe(result => { console.log(result) }, error => console.error(error), () => this.ngOnInit());
@@ -87,7 +96,6 @@ export class TicketsComponent implements OnInit {
       return;
     }
 
-
     this.ticketViewModels = [];
     this.tickets.forEach((ticket, i) => {
       this.ticketViewModels.push(new TicketViewModel());
@@ -102,5 +110,18 @@ export class TicketsComponent implements OnInit {
       empb = this.employeesBase.find(x => x.employeeBaseId == emp.employeeBaseId)
       this.ticketViewModels[i].employee = empb.name;
     });
+  }
+
+  goEdit(id: string) {
+    var editButton = document.getElementsByClassName('edit');
+    var addButton = document.getElementsByClassName('add');
+    editButton[0].removeAttribute('hidden');
+    addButton[0].setAttribute('hidden', '');
+
+    var nid = +id;
+
+    var tckt: Ticket = this.tickets.find(x => x.ticketId == nid)
+
+    this.newTicket = tckt;
   }
 }

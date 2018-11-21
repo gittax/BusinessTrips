@@ -33,7 +33,7 @@ export class HttpService {
   }
 
   putEmployee(id: string, employee: Employee) {
-    return this.http.put<Employee>(this.baseUrl + `api/Employee/${id}`, employee);
+    return this.http.put<Employee>(this.baseUrl + `api/Employees/${id}`, employee);
 
   }
 
@@ -81,8 +81,7 @@ export class HttpService {
   }
 
   putRoute(id: string, route: Route) {
-    return this.http.put<Route>(this.baseUrl + `api/Route/${id}`, route);
-
+    return this.http.put<Route>(this.baseUrl + `api/Routes/${id}`, route);
   }
 
   deleteRoute(id: string) {
@@ -100,7 +99,7 @@ export class HttpService {
   }
 
   putTicket(id: string, ticket: Ticket) {
-    return this.http.put<Ticket>(this.baseUrl + `api/Ticket/${id}`, ticket);
+    return this.http.put<Ticket>(this.baseUrl + `api/Tickets/${id}`, ticket);
 
   }
 

@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { RoutesComponent } from './routes/routes.component';
 import { TicketsComponent } from './tickets/tickets.component';
+import { JwPaginationComponent } from 'jw-angular-pagination';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { TicketsComponent } from './tickets/tickets.component';
     HomeComponent,
     EmployeesComponent,
     RoutesComponent,
-    TicketsComponent
+    TicketsComponent,
+    JwPaginationComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

@@ -23,7 +23,7 @@
   <tbody>
     <tr *ngFor="let request of requestViewModels">
       <td>{{ request.requestId }}</td>
-      <td>{{ request.date }}</td>
+      <td>{{ request.date | date:'MM/dd/yyyy' }}</td>
       <td>{{ request.declarer }}</td>
       <td>{{ request.project }}</td>
       <td>{{ request.subproject }}</td>
@@ -37,7 +37,7 @@
     </tr>
     <tr>
       <td></td>
-      <td><input type="date" [(ngModel)]="newRequest.date" required></td>
+      <td><input type="date" [ngModel]="newRequest.date | date:'yyyy-MM-dd'" (ngModelChange)="newRequest.date = $event" name="startDate" required></td>
       <td><select [(ngModel)]="newRequest.declarerId" required> <option *ngFor="let emp of employeesBase" [value]="emp.employeeBaseId">{{emp.name}}</option></select></td>
       <td><select [(ngModel)]="newRequest.projectId" (ngModelChange)="onChange($event)" required> <option *ngFor="let prj of projects" [value]="prj.projectId">{{prj.name}}</option></select></td>
       <td><select [(ngModel)]="newRequest.subprojectId" required> <option *ngFor="let sprj of localSubprojects" [value]="sprj.subprojectId">{{sprj.name}}</option></select></td>

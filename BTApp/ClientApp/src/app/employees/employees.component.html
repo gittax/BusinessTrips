@@ -1,4 +1,4 @@
-<h1>Ticket requests</h1>
+<h1>Employees</h1>
 
 <p>Fetching requests from the DB.</p>
 
@@ -24,25 +24,26 @@
       <td>{{ employee.employeeBase }}</td>
       <td>{{ employee.docType }}</td>
       <td>{{ employee.docNumber }}</td>
-      <td>{{ employee.validThrough }}</td>
+      <td>{{ employee.validThrough | date:'MM/dd/yyyy' }}</td>
       <td>{{ employee.gender }}</td>
-      <td>{{ employee.birthDate }}</td>
+      <td>{{ employee.birthDate | date:'MM/dd/yyyy' }}</td>
       <td>{{ employee.birthPlace }}</td>
       <td>{{ employee.requestId }}</td>
-      <td><button (click)="deleteEmployee(employee.employeeId)">Del</button></td>
+      <td><button (click)="deleteEmployee(employee.employeeId)">Del</button> <button (click)="goEdit(employee.employeeId)">Edit</button></td>
     </tr>
     <tr>
       <td></td>
       <td><select [(ngModel)]="newEmployee.employeeBaseId" required><option *ngFor="let emp of employeesBase" [value]="emp.employeeBaseId">{{emp.name}}</option></select></td>
       <td><input [(ngModel)]="newEmployee.docType" required></td>
       <td><input [(ngModel)]="newEmployee.docNumber" required></td>
-      <td><input type="date" [(ngModel)]="newEmployee.validThrough" required></td>
+      <td><input type="date" [ngModel]="newEmployee.validThrough | date:'yyyy-MM-dd'" (ngModelChange)="newEmployee.validThrough = $event" name="validThrough" required></td>
       <td><input [(ngModel)]="newEmployee.gender" required></td>
-      <td><input type="date" [(ngModel)]="newEmployee.birthDate" required></td>
+      <td><input type="date" [ngModel]="newEmployee.birthDate | date:'yyyy-MM-dd'" (ngModelChange)="newEmployee.birthDate = $event" name="birthDate" required></td>
       <td><input [(ngModel)]="newEmployee.birthPlace" required></td>
       <td><select [(ngModel)]="newEmployee.requestId" required><option *ngFor="let rqst of requests" [(value)]="rqst.requestId">{{rqst.requestId}}</option></select></td>
       <td>
-        <button *ngIf="employees" type="submit" (click)='addEmployee(newEmployee)'>Add <i class='fas fa-plus'></i></button>
+        <button class="add" *ngIf="employees" type="submit" (click)='addEmployee(newEmployee)'>Add <i class='fas fa-plus'></i></button>
+        <button class="edit" *ngIf="employees" type="submit" (click)='editEmployee(newEmployee.employeeId, newEmployee)' hidden>Submit</button>
       </td>
     </tr>
   </tbody>

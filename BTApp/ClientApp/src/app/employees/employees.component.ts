@@ -43,6 +43,15 @@ export class EmployeesComponent implements OnInit {
       .subscribe(result => { console.log(result) }, error => console.error(error), () => this.ngOnInit());
   }
 
+  editEmployee(id: string, employee: Employee) {
+    this.httpService.putEmployee(id, employee)
+      .subscribe(result => { console.log(result) }, error => console.error(error), () => this.ngOnInit());
+    var editButton = document.getElementsByClassName('edit');
+    var addButton = document.getElementsByClassName('add');
+    addButton[0].removeAttribute('hidden');
+    editButton[0].setAttribute('hidden', '');
+  }
+
   deleteEmployee(id: string) {
     this.httpService.deleteEmployee(id)
       .subscribe(result => { console.log(result) }, error => console.error(error), () => this.ngOnInit());
@@ -85,5 +94,18 @@ export class EmployeesComponent implements OnInit {
       emp = this.employeesBase.find(x => x.employeeBaseId == employee.employeeBaseId);
       this.employeeViewModels[i].employeeBase = emp.name;
     });
+  }
+
+  goEdit(id: string) {
+    var editButton = document.getElementsByClassName('edit');
+    var addButton = document.getElementsByClassName('add');
+    editButton[0].removeAttribute('hidden');
+    addButton[0].setAttribute('hidden', '');
+
+    var nid = +id;
+
+    var emp: Employee = this.employees.find(x => x.employeeId == nid)
+
+    this.newEmployee = emp;
   }
 }
