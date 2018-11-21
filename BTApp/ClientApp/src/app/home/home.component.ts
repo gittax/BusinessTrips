@@ -121,6 +121,8 @@ export class HomeComponent {
         this.requestViewModels[i].subproject = sprj.name;
       }
     })
+
+    console.log(this.localSubprojects);
   }
 
   /*
@@ -146,9 +148,11 @@ export class HomeComponent {
     this.subprojects.forEach((sprj, i) => {
       if (sprj.projectId == projectId) {
         this.localSubprojects.push(new Subproject());
-        this.localSubprojects[this.localSubprojects.length-1] = sprj;
+        this.localSubprojects[this.localSubprojects.length - 1] = sprj;
+        this.localSubprojects[this.localSubprojects.length - 1].subprojectId = sprj.subprojectId;
       }
     });
+    console.log(this.localSubprojects);
     // ... do other stuff here ...
   }
 

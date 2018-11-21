@@ -20,6 +20,6 @@ namespace BTApp.Models
         [Display(Name = "Employees")]
         public ICollection<EmployeeBaseProjectAssign> EmployeeProjectAssigns { get; set; }
         public ICollection<Subproject> Subprojects { get; set; }
-        public Request Request { get; set; }
+        public ICollection<Request> Requests { get; set; }
     }
 }

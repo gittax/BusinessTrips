@@ -11,6 +11,6 @@ namespace BTApp.Models
         public string Name { get; set; }
         public int ProjectId { get; set; }
         public virtual Project Project { get; set; }
-        public Request Request { get; set; }
+        public ICollection<Request> Requests { get; set; }
     }
 }
