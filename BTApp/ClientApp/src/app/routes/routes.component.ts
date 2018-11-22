@@ -21,6 +21,10 @@ export class RoutesComponent implements OnInit {
 
   constructor(private httpService: HttpService) { }
 
+  items: Route[] = this.routeViewModels;
+
+  pageOfItems: Route[];
+
   ngOnInit() {
 
     this.i = 0;
@@ -95,5 +99,10 @@ export class RoutesComponent implements OnInit {
     var rt: Route = this.routes.find(x => x.routeId == nid)
 
     this.newRoute = rt;
+  }
+
+  onChangePage(pageOfItems: RequestViewModel[]) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
   }
 }

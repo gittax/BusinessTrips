@@ -21,7 +21,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let route of routeViewModels">
+    <tr *ngFor="let route of pageOfItems">
       <td>{{ route.routeId }}</td>
       <td>{{ route.routeType }}</td>
       <td>{{ route.departureTime | date:'MM/dd/yyyy HH:mm' }}</td>
@@ -54,4 +54,5 @@
     </tr>
   </tbody>
 </table>
+<jw-pagination [items]="requestViewModels" [pageSize]="5" (changePage)="onChangePage($event)"></jw-pagination>
 <button (click)='check()'>Check <i class='fas fa-plus'></i></button>

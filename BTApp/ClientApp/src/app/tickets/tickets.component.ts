@@ -24,6 +24,10 @@ export class TicketsComponent implements OnInit {
 
   constructor(private httpService: HttpService) { }
 
+  items: TicketViewModel[] = this.ticketViewModels;
+
+  pageOfItems: TicketViewModel[];
+
   ngOnInit() {
 
     this.i = 0;
@@ -123,5 +127,10 @@ export class TicketsComponent implements OnInit {
     var tckt: Ticket = this.tickets.find(x => x.ticketId == nid)
 
     this.newTicket = tckt;
+  }
+
+  onChangePage(pageOfItems: RequestViewModel[]) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
   }
 }

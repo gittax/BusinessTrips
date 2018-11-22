@@ -7,7 +7,9 @@
 <table class='table' *ngIf="employees">
   <thead>
     <tr>
-      <th>ID</th>
+      <th><a href="#" ng-click="orderByField='employeeId'; reverseSort = !reverseSort">
+  ID <span ng-show="orderByField == 'employeeId'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+</a></th>
       <th>Имя</th>
       <th>Тип документа</th>
       <th>Номер документа</th>
@@ -19,7 +21,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let employee of employeeViewModels">
+    <tr *ngFor="let employee of pageOfItems">
       <td>{{ employee.employeeId }}</td>
       <td>{{ employee.employeeBase }}</td>
       <td>{{ employee.docType }}</td>
@@ -47,4 +49,5 @@
       </td>
     </tr>
   </tbody>
+  <jw-pagination [items]="requestViewModels" [pageSize]="5" (changePage)="onChangePage($event)"></jw-pagination>
 </table>

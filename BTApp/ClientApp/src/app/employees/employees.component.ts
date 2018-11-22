@@ -23,6 +23,10 @@ export class EmployeesComponent implements OnInit {
 
   constructor(private httpService: HttpService) { }
 
+  items: EmployeeViewModel[] = this.employeeViewModels;
+
+  pageOfItems: EmployeeViewModel[];
+
   ngOnInit() {
 
     this.i = 0;
@@ -107,5 +111,10 @@ export class EmployeesComponent implements OnInit {
     var emp: Employee = this.employees.find(x => x.employeeId == nid)
 
     this.newEmployee = emp;
+  }
+
+  onChangePage(pageOfItems: RequestViewModel[]) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
   }
 }
