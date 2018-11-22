@@ -101,7 +101,7 @@ export class RoutesComponent implements OnInit {
     this.newRoute = rt;
   }
 
-  onChangePage(pageOfItems: RequestViewModel[]) {
+  onChangePage(pageOfItems: Route[]) {
     // update current page of items
     this.pageOfItems = pageOfItems;
   }

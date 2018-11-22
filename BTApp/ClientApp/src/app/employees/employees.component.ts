@@ -113,7 +113,7 @@ export class EmployeesComponent implements OnInit {
     this.newEmployee = emp;
   }
 
-  onChangePage(pageOfItems: RequestViewModel[]) {
+  onChangePage(pageOfItems: EmployeeViewModel[]) {
     // update current page of items
     this.pageOfItems = pageOfItems;
   }

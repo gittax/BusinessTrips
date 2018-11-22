@@ -129,7 +129,7 @@ export class TicketsComponent implements OnInit {
     this.newTicket = tckt;
   }
 
-  onChangePage(pageOfItems: RequestViewModel[]) {
+  onChangePage(pageOfItems: TicketViewModel[]) {
     // update current page of items
     this.pageOfItems = pageOfItems;
   }
