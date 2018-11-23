@@ -1,7 +1,7 @@
 <h1>Ticket requests</h1>
 
 <p>Fetching requests from the DB.</p>
-
+<!--
 <p *ngIf="!requests"><em>Loading...</em></p>
 
 <table class='table' *ngIf="requests">
@@ -56,3 +56,19 @@
 </table>
 <jw-pagination [items]="requestViewModels" [pageSize]="5" (changePage)="onChangePage($event)"></jw-pagination>
 <button (click)='check()'>Check <i class='fas fa-plus'></i></button>
+-->
+<!--
+<dx-data-grid [dataSource]="requestViewModels"
+              keyExpr="requestId">
+  <dxi-column dataField="date"></dxi-column>
+  <dxi-column dataField="declarer"></dxi-column>
+  <dxi-column dataField="project"></dxi-column>
+  <dxi-column dataField="subproject"></dxi-column>
+  <dxi-column dataField="requestNumber"></dxi-column>
+  <dxi-column dataField="budget"></dxi-column>
+  <dxi-column dataField="cost"></dxi-column>
+  <dxi-column dataField="manager"></dxi-column>
+  <dxi-column dataField="status"></dxi-column>
+  <dxi-column dataField="officeManager"></dxi-column>
+</dx-data-grid>
+-->

@@ -27,6 +27,8 @@
     "aspnet-prerendering": "^3.0.1",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
+    "devextreme": "^18.2.3",
+    "devextreme-angular": "^18.2.3",
     "jw-angular-pagination": "^1.0.5",
     "jw-paginate": "^1.0.2",
     "rxjs": "^5.5.6",
