@@ -39,21 +39,17 @@ namespace BTApp.Models
     }
     public enum GenderType
     {
-        [Display(Name = "None")]
-        None = 0,
         [Display(Name = "Мale")]
-        Male = 1,
+        Male = 0,
         [Display(Name = "Female")]
-        Female = 2
+        Female = 1
     }
 
     public enum DocType
     {
-        [Display(Name = "None")]
-        None = 0,
         [Display(Name = "Passport RF")]
-        Passport = 1,
+        Passport = 0,
         [Display(Name = "International Passport")]
-        InterPassport = 2
+        InterPassport = 1
     }
 }

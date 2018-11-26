@@ -5,6 +5,7 @@ import { EmployeeBase, Employee, EmployeeBaseProjectAssign, EmployeeRouteAssign,
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css'],
   providers: [HttpService]
 })
 
@@ -16,6 +17,7 @@ export class HomeComponent implements OnInit {
   public projects: Project[];
   public subprojects: Subproject[];
   public localSubprojects: Subproject[];
+  public statuses: string[] = ["Created", "Awaits for PM approval", "Pending payment", "Payment passed"];
   done: boolean = false;
   newEmployeeBase: EmployeeBase = new EmployeeBase();
   newRequest: Request = new Request();
@@ -109,7 +111,8 @@ export class HomeComponent implements OnInit {
       this.requestViewModels[i].businessTripNumber = request.businessTripNumber;
       this.requestViewModels[i].budget = request.budget;
       this.requestViewModels[i].cost = request.cost;
-      this.requestViewModels[i].status = request.status;
+      this.requestViewModels[i].status = this.statuses[request.status];
+
 
       emp = this.employeesBase.find(x => x.employeeBaseId == request.declarerId)
       this.requestViewModels[i].declarer = emp.name;

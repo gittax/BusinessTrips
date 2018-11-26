@@ -37,14 +37,21 @@
     </tr>
     <tr>
       <td></td>
-      <td><input [(ngModel)]="newRoute.routeType" required></td>
+      <td><select [(ngModel)]="newRoute.routeType"><option *ngFor="let routeType of routeTypes" [value]="routeTypes.indexOf(routeType)">{{routeType}}</option></select></td>
       <td><input type="datetime-local" [(ngModel)]="newRoute.departureTime" required></td>
       <td><input type="datetime-local" [(ngModel)]="newRoute.arrivalTime" required></td>
-      <td><input [(ngModel)]="newRoute.ticketType" required></td>
+      <td><select [(ngModel)]="newRoute.ticketType"><option *ngFor="let ticketType of ticketTypes" [value]="ticketTypes.indexOf(ticketType)">{{ticketType}}</option></select></td>
       <td><input [(ngModel)]="newRoute.departureCity" required></td>
       <td><input [(ngModel)]="newRoute.arrivalCity" required></td>
       <td><input [(ngModel)]="newRoute.flightNumber" required></td>
-      <td><input [(ngModel)]="newRoute.classType" required></td>
+      <td>
+        <select *ngIf="newRoute.routeType==0" [(ngModel)]="newRoute.classType">
+          <option *ngFor="let classType of flightClassTypes" [value]="flightClassTypes.indexOf(classType)">{{classType}}</option>
+        </select>
+        <select *ngIf="newRoute.routeType==1" [(ngModel)]="newRoute.classType">
+          <option *ngFor="let classType of trainClassTypes" [value]="trainClassTypes.indexOf(classType)+4">{{classType}}</option>
+        </select>
+      </td>
       <td><input [(ngModel)]="newRoute.budget" required></td>
       <td><select [(ngModel)]="newRoute.requestId" required> <option *ngFor="let rqst of requests" [value]="rqst.requestId">{{rqst.requestId}}</option></select></td>
       <td>
@@ -54,5 +61,4 @@
     </tr>
   </tbody>
 </table>
-<jw-pagination [items]="routeViewModels" [pageSize]="5" (changePage)="onChangePage($event)"></jw-pagination>
-<button (click)='check()'>Check <i class='fas fa-plus'></i></button>
+<jw-pagination class="pagination" [items]="routeViewModels" [pageSize]="5" (changePage)="onChangePage($event)"></jw-pagination>

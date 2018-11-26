@@ -31,38 +31,34 @@ namespace BTApp.Models
     }
     public enum RouteType
     {
-        [Display(Name = "None")]
-        None = 0,
         [Display(Name = "Flight")]
-        Flight = 1,
+        Flight = 0,
         [Display(Name = "Train")]
-        Train = 2
+        Train = 1
     }
 
     public enum TicketType
     {
-        [Display(Name = "None")]
-        None = 0,
         [Display(Name = "Departure")]
-        Departure = 1,
+        Departure = 0,
         [Display(Name = "Arrival")]
-        Arrival = 2,
+        Arrival = 1,
         [Display(Name = "Transit")]
-        Transit = 3
+        Transit = 2
     }
     public enum ClassType
     {
-        [Display(Name = "None")]
-        None = 0,
-        [Display(Name = "Econom")]
-        Eco = 1,
-        [Display(Name = "Sit")]
-        Sit = 2,
+        [Display(Name = "Economy Class")]
+        Eco = 0,
+        [Display(Name = "Premium Economy Class")]
+        PremEco = 1,
+        [Display(Name = "Business Class")]
+        BC = 2,
+        [Display(Name = "First Class")]
+        FC = 3,
         [Display(Name = "Coupe")]
-        Coupe = 3,
-        [Display(Name = "CB")]
-        CB = 4,
-        [Display(Name = "Business class")]
-        Business = 5
+        Coupe = 4,
+        [Display(Name = "Sit")]
+        Sit = 5
     }
 }

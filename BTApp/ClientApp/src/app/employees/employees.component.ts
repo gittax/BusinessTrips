@@ -15,6 +15,9 @@ export class EmployeesComponent implements OnInit {
   public employees: Employee[];
   public employeesBase: EmployeeBase[];
   public requests: Request[];
+  public genders: string[] = ["Male", "Female"];
+  public docTypes: string[] = ["Passport RF", "International Passport"];
+  
   done: boolean = false;
 
   employeeViewModels: EmployeeViewModel[];
@@ -87,10 +90,10 @@ export class EmployeesComponent implements OnInit {
     this.employees.forEach((employee, i) => {
       this.employeeViewModels.push(new EmployeeViewModel());
       this.employeeViewModels[i].employeeId = employee.employeeId;
-      this.employeeViewModels[i].docType = employee.docType;
+      this.employeeViewModels[i].docType = this.docTypes[employee.docType];
       this.employeeViewModels[i].docNumber = employee.docNumber;
       this.employeeViewModels[i].validThrough = employee.validThrough;
-      this.employeeViewModels[i].gender = employee.gender;
+      this.employeeViewModels[i].gender = this.genders[employee.gender];
       this.employeeViewModels[i].birthDate = employee.birthDate;
       this.employeeViewModels[i].birthPlace = employee.birthPlace;
       this.employeeViewModels[i].requestId = employee.requestId;

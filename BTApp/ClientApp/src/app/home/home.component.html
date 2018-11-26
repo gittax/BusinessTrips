@@ -45,7 +45,7 @@
       <td><input type="number" [(ngModel)]="newRequest.budget" required></td>
       <td><input type="number" [(ngModel)]="newRequest.cost" required></td>
       <td><select [(ngModel)]="newRequest.managerId" required> <option *ngFor="let emp of employeesBase" [(value)]="emp.employeeBaseId">{{emp.name}}</option></select></td>
-      <td><input disabled [(ngModel)]="newRequest.status"></td>
+      <td><select [(ngModel)]="newRequest.status"><option *ngFor="let status of statuses" [value]="statuses.indexOf(status)">{{status}}</option></select></td>
       <td><select [(ngModel)]="newRequest.officeManagerId" required> <option *ngFor="let emp of employeesBase" [(value)]="emp.employeeBaseId">{{emp.name}}</option></select></td>
       <td>
         <button class="add" *ngIf="requests" type="submit" (click)='addRequest(newRequest)'>Add <i class='fas fa-plus'></i></button>
@@ -54,5 +54,4 @@
     </tr>
   </tbody>
 </table>
-<jw-pagination [items]="requestViewModels" [pageSize]="5" (changePage)="onChangePage($event)"></jw-pagination>
-<button (click)='check()'>Check <i class='fas fa-plus'></i></button>
+<jw-pagination class="pagination" [items]="requestViewModels" [pageSize]="5" (changePage)="onChangePage($event)"></jw-pagination>

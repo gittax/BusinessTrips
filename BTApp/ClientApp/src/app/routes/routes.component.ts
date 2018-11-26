@@ -13,6 +13,12 @@ export class RoutesComponent implements OnInit {
   private i: number;
   public routes: Route[];
   public requests: Request[];
+  public routeTypes: string[] = ["Flight", "Train"];
+  public ticketTypes: string[] = ["Departure", "Arrival", "Transit"];
+  public classTypes: string[] = ["Economy class", "Premium Economy Class", "Business class", "First class", "Coupe", "Sit"];
+  public flightClassTypes: string[] = ["Economy class", "Premium Economy Class", "Business class", "First class"];
+  public trainClassTypes: string[] = ["Coupe", "Sit"];
+
   done: boolean = false;
 
   routeViewModels: Route[];
@@ -77,14 +83,14 @@ export class RoutesComponent implements OnInit {
       this.routeViewModels[i].arrivalCity = rts.arrivalCity;
       this.routeViewModels[i].arrivalTime = rts.arrivalTime;
       this.routeViewModels[i].budget = rts.budget;
-      this.routeViewModels[i].classType = rts.classType;
+      this.routeViewModels[i].classType = this.classTypes[rts.classType];
       this.routeViewModels[i].departureCity = rts.departureCity;
       this.routeViewModels[i].departureTime = rts.departureTime;
       this.routeViewModels[i].flightNumber = rts.flightNumber;
       this.routeViewModels[i].requestId = rts.requestId;
       this.routeViewModels[i].routeId = rts.routeId;
-      this.routeViewModels[i].routeType = rts.routeType;
-      this.routeViewModels[i].ticketType = rts.ticketType;
+      this.routeViewModels[i].routeType = this.routeTypes[rts.routeType];
+      this.routeViewModels[i].ticketType = this.ticketTypes[rts.ticketType];
     })
   }
 

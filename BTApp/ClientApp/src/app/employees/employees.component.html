@@ -34,10 +34,10 @@
     <tr>
       <td></td>
       <td><select [(ngModel)]="newEmployee.employeeBaseId" required><option *ngFor="let emp of employeesBase" [value]="emp.employeeBaseId">{{emp.name}}</option></select></td>
-      <td><input [(ngModel)]="newEmployee.docType" required></td>
-      <td><input [(ngModel)]="newEmployee.docNumber" required></td>
+      <td><select [(ngModel)]="newEmployee.docType" required> <option *ngFor="let docType of docTypes" [value]="docTypes.indexOf(docType)">{{docType}}</option></select></td>
+      <td><input *ngIf="newEmployee.docType" [(ngModel)]="newEmployee.docNumber" required></td>
       <td><input type="date" [ngModel]="newEmployee.validThrough | date:'yyyy-MM-dd'" (ngModelChange)="newEmployee.validThrough = $event" name="validThrough" required></td>
-      <td><input [(ngModel)]="newEmployee.gender" required></td>
+      <td><select [(ngModel)]="newEmployee.gender" required> <option *ngFor="let gender of genders" [value]="genders.indexOf(gender)">{{gender}}</option></select></td>
       <td><input type="date" [ngModel]="newEmployee.birthDate | date:'yyyy-MM-dd'" (ngModelChange)="newEmployee.birthDate = $event" name="birthDate" required></td>
       <td><input [(ngModel)]="newEmployee.birthPlace" required></td>
       <td><select [(ngModel)]="newEmployee.requestId" required><option *ngFor="let rqst of requests" [(value)]="rqst.requestId">{{rqst.requestId}}</option></select></td>
@@ -48,4 +48,4 @@
     </tr>
   </tbody>
 </table>
-<jw-pagination [items]="employeeViewModels" [pageSize]="5" (changePage)="onChangePage($event)"></jw-pagination>
+<jw-pagination class="pagination" [items]="employeeViewModels" [pageSize]="5" (changePage)="onChangePage($event)"></jw-pagination>

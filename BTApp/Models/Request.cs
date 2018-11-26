@@ -33,15 +33,13 @@ namespace BTApp.Models
     }
     public enum StatusType
     {
-        [Display(Name = "None")]
-        None = 0,
         [Display(Name = "Created")]
-        Created = 1,
+        Created = 0,
         [Display(Name = "Awaits for PM approval")]
-        PMapprove = 2,
+        PMapprove = 1,
         [Display(Name = "Pending payment")]
-        PayPending = 3,
+        PayPending = 2,
         [Display(Name = "Payment passed")]
-        Paid = 4
+        Paid = 3
     }
 }
