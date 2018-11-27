@@ -78,11 +78,13 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\models\models.ts" />
+    <None Remove="ClientApp\src\app\pipes\filter.pipe.ts" />
     <None Remove="ClientApp\src\app\services\http.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\models\models.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\pipes\filter.pipe.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\http.service.ts" />
   </ItemGroup>
 

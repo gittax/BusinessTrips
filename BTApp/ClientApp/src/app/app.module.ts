@@ -11,6 +11,7 @@ import { EmployeesComponent } from './employees/employees.component';
 import { RoutesComponent } from './routes/routes.component';
 import { TicketsComponent } from './tickets/tickets.component';
 import { JwPaginationComponent } from 'jw-angular-pagination';
+import { CategoryPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { JwPaginationComponent } from 'jw-angular-pagination';
     EmployeesComponent,
     RoutesComponent,
     TicketsComponent,
-    JwPaginationComponent
+    JwPaginationComponent,
+    CategoryPipe
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

@@ -4,6 +4,13 @@
 
 <p *ngIf="!requests"><em>Loading...</em></p>
 
+<div *ngIf="requests" class="form-group">
+  <div class="col-md-6">
+    <input type="text" [(ngModel)]="searchText"
+           class="form-control" placeholder="Search By Declarer" />
+  </div>
+</div>
+
 <table class='table' *ngIf="requests">
   <thead>
     <tr>
@@ -21,7 +28,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let request of pageOfItems">
+    <tr *ngFor="let request of pageOfItems | category: searchText">
       <td>{{ request.requestId }}</td>
       <td>{{ request.date | date:'MM/dd/yyyy' }}</td>
       <td>{{ request.declarer }}</td>

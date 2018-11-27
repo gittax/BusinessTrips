@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../services/http.service';
 import { EmployeeBase, Request, Project, Subproject, RequestViewModel } from '../models/models';
+import { CategoryPipe } from '../pipes/filter.pipe';
 
 @Component({
   selector: 'app-home',
@@ -21,6 +22,9 @@ export class HomeComponent implements OnInit {
   done: boolean = false;
   newEmployeeBase: EmployeeBase = new EmployeeBase();
   newRequest: Request = new Request();
+
+  isDesc: boolean = false;
+  column: string = 'declarer';
 
   constructor(private httpService: HttpService) { }
 
