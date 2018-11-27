@@ -21,6 +21,8 @@ export class HomeComponent implements OnInit {
   done: boolean = false;
   newEmployeeBase: EmployeeBase = new EmployeeBase();
   newRequest: Request = new Request();
+  
+  columnsToDisplay: string[] = ['requestId', 'date', 'declarer', 'project', 'subproject', 'requestNumber', 'budget', 'cost', 'manager', 'status', 'officeManager'];
 
   constructor(private httpService: HttpService) { }
 
