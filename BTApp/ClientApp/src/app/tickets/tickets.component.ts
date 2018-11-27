@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../services/http.service';
-import { EmployeeBase, Employee, EmployeeBaseProjectAssign, EmployeeRouteAssign, Request, Project, Route, Subproject, Ticket, TicketViewModel, EmployeeBaseViewModel} from '../models/models';
+import { EmployeeBase, Employee, Request, Ticket, TicketViewModel, EmployeeBaseViewModel} from '../models/models';
 
 @Component({
   selector: 'app-tickets',

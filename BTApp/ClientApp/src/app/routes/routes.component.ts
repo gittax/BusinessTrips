@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../services/http.service';
-import { EmployeeBase, Employee, EmployeeBaseProjectAssign, EmployeeRouteAssign, Request, Project, Route, Subproject, Ticket, RequestViewModel } from '../models/models';
+import { Request, Route} from '../models/models';
 
 @Component({
   selector: 'app-routes',

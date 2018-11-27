@@ -30,11 +30,11 @@
     <tr>
       <td></td>
       <td><input [(ngModel)]="newTicket.cost" required></td>
-      <td><select [(ngModel)]="newTicket.employeeId" required><option *ngFor="let emp of employeeBaseViewModels" [(value)]="emp.employeeId">{{emp.name}}</option></select></td>
+      <td><select [(ngModel)]="newTicket.employeeId" required><option *ngFor="let emp of employeeBaseViewModels" [value]="emp.employeeId">{{emp.name}}</option></select></td>
       <td><input [(ngModel)]="newTicket.routeType" required></td>
       <td><input type="datetime-local" [(ngModel)]="newTicket.departureTime" required></td>
       <td><input type="datetime-local" [(ngModel)]="newTicket.arrivalTime" required></td>
-      <td><select [(ngModel)]="newTicket.requestId" required><option *ngFor="let rqst of requests" [(value)]="rqst.requestId">{{rqst.requestId}}</option></select></td>
+      <td><select [(ngModel)]="newTicket.requestId" required><option *ngFor="let rqst of requests" [value]="rqst.requestId">{{rqst.requestId}}</option></select></td>
       <td>
         <button class="add" *ngIf="tickets" type="submit" (click)='addTicket(newTicket)'>Add <i class='fas fa-plus'></i></button>
         <button class="edit" *ngIf="tickets" type="submit" (click)='editTicket(newTicket.ticketId, newTicket)' hidden>Submit</button>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../services/http.service';
-import { EmployeeBase, Employee, EmployeeBaseProjectAssign, EmployeeRouteAssign, Request, Project, Route, Subproject, Ticket, RequestViewModel, EmployeeViewModel } from '../models/models';
+import { EmployeeBase, Employee, Request, EmployeeViewModel } from '../models/models';
 
 @Component({
   selector: 'app-employees',

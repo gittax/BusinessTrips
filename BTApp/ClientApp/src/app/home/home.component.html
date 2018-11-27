@@ -44,9 +44,9 @@
       <td><input type="text" [(ngModel)]="newRequest.requestNumber" required></td>
       <td><input type="number" [(ngModel)]="newRequest.budget" required></td>
       <td><input type="number" [(ngModel)]="newRequest.cost" required></td>
-      <td><select [(ngModel)]="newRequest.managerId" required> <option *ngFor="let emp of employeesBase" [(value)]="emp.employeeBaseId">{{emp.name}}</option></select></td>
+      <td><select [(ngModel)]="newRequest.managerId" required> <option *ngFor="let emp of employeesBase" [value]="emp.employeeBaseId">{{emp.name}}</option></select></td>
       <td><select [(ngModel)]="newRequest.status"><option *ngFor="let status of statuses" [value]="statuses.indexOf(status)">{{status}}</option></select></td>
-      <td><select [(ngModel)]="newRequest.officeManagerId" required> <option *ngFor="let emp of employeesBase" [(value)]="emp.employeeBaseId">{{emp.name}}</option></select></td>
+      <td><select [(ngModel)]="newRequest.officeManagerId" required> <option *ngFor="let emp of employeesBase" [value]="emp.employeeBaseId">{{emp.name}}</option></select></td>
       <td>
         <button class="add" *ngIf="requests" type="submit" (click)='addRequest(newRequest)'>Add <i class='fas fa-plus'></i></button>
         <button class="edit" *ngIf="requests" type="submit" (click)='editRequest(newRequest.requestId, newRequest)' hidden>Submit</button>

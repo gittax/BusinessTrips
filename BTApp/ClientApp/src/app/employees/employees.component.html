@@ -40,7 +40,7 @@
       <td><select [(ngModel)]="newEmployee.gender" required> <option *ngFor="let gender of genders" [value]="genders.indexOf(gender)">{{gender}}</option></select></td>
       <td><input type="date" [ngModel]="newEmployee.birthDate | date:'yyyy-MM-dd'" (ngModelChange)="newEmployee.birthDate = $event" name="birthDate" required></td>
       <td><input [(ngModel)]="newEmployee.birthPlace" required></td>
-      <td><select [(ngModel)]="newEmployee.requestId" required><option *ngFor="let rqst of requests" [(value)]="rqst.requestId">{{rqst.requestId}}</option></select></td>
+      <td><select [(ngModel)]="newEmployee.requestId" required><option *ngFor="let rqst of requests" [value]="rqst.requestId">{{rqst.requestId}}</option></select></td>
       <td>
         <button class="add" *ngIf="employees" type="submit" (click)='addEmployee(newEmployee)'>Add <i class='fas fa-plus'></i></button>
         <button class="edit" *ngIf="employees" type="submit" (click)='editEmployee(newEmployee.employeeId, newEmployee)' hidden>Submit</button>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../services/http.service';
-import { EmployeeBase, Employee, EmployeeBaseProjectAssign, EmployeeRouteAssign, Request, Project, Route, Subproject, Ticket, RequestViewModel } from '../models/models';
+import { EmployeeBase, Request, Project, Subproject, RequestViewModel } from '../models/models';
 
 @Component({
   selector: 'app-home',
@@ -152,7 +152,7 @@ export class HomeComponent implements OnInit {
     console.log(projectId);
     projectId = +projectId;
     this.newRequest.projectId = projectId;
-    this.subprojects.forEach((sprj, i) => {
+    this.subprojects.forEach((sprj) => {
       if (sprj.projectId == projectId) {
         this.localSubprojects.push(new Subproject());
         this.localSubprojects[this.localSubprojects.length - 1] = sprj;
