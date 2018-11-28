@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { HttpService } from '../services/http.service';
 import { EmployeeBase, Request, Project, Subproject, RequestViewModel } from '../models/models';
-import { PageEvent, MatPaginator, MatTableDataSource } from '@angular/material';
+import { PageEvent, MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 
 @Component({
   selector: 'app-home',
@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
   dataSource = new MatTableDataSource<RequestViewModel>([]);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+@ViewChild(MatSort) sort: MatSort;
 
   constructor(private httpService: HttpService) { }
 
@@ -146,6 +147,7 @@ export class HomeComponent implements OnInit {
 
     this.dataSource = new MatTableDataSource<RequestViewModel>(this.requestViewModels);
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
     this.isLoading = false;
   }
   

@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule, MatInputModule } from '@angular/material';
+import { MatSortModule } from '@angular/material/sort';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -13,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { EmployeesComponent } from './employees/employees.component';
 import { RoutesComponent } from './routes/routes.component';
 import { TicketsComponent } from './tickets/tickets.component';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { TicketsComponent } from './tickets/tickets.component';
     FormsModule,
     MatTableModule,
     MatInputModule,
+    MatSortModule,
     MatPaginatorModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
