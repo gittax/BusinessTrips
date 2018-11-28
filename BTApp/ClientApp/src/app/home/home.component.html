@@ -3,7 +3,7 @@
 <p>Fetching requests from the DB.</p>
 
 <p *ngIf="!requests"><em>Loading...</em></p>
-
+<!--
 <table class='table' *ngIf="requests">
   <thead>
     <tr>
@@ -55,66 +55,80 @@
   </tbody>
 </table>
 <jw-pagination class="pagination" [items]="requestViewModels" [pageSize]="5" (changePage)="onChangePage($event)"></jw-pagination>
+    -->
+<div [hidden]="isLoading" class="example-container mat-elevation-z8">
 
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
 
-<mat-table [dataSource]="requestViewModels">
+  <mat-table #table [dataSource]="dataSource">
 
-  <ng-container matColumnDef="requestId">
-    <mat-header-cell *matHeaderCellDef> ID заявки </mat-header-cell>
-    <mat-cell *matCellDef="let request"> {{request.requestId}} </mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="requestId">
+      <mat-header-cell *matHeaderCellDef> ID заявки </mat-header-cell>
+      <mat-cell *matCellDef="let request"> {{request.requestId}} </mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="date">
-    <mat-header-cell *matHeaderCellDef> Дата заявки </mat-header-cell>
-    <mat-cell *matCellDef="let request"> {{request.date | date:'MM/dd/yyyy'}} </mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="date">
+      <mat-header-cell *matHeaderCellDef> Дата заявки </mat-header-cell>
+      <mat-cell *matCellDef="let request"> {{request.date | date:'MM/dd/yyyy'}} </mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="declarer">
-    <mat-header-cell *matHeaderCellDef> Заявитель </mat-header-cell>
-    <mat-cell *matCellDef="let request"> {{request.declarer}} </mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="declarer">
+      <mat-header-cell *matHeaderCellDef> Заявитель </mat-header-cell>
+      <mat-cell *matCellDef="let request"> {{request.declarer}} </mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="project">
-    <mat-header-cell *matHeaderCellDef> Проект </mat-header-cell>
-    <mat-cell *matCellDef="let request"> {{request.project}} </mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="project">
+      <mat-header-cell *matHeaderCellDef> Проект </mat-header-cell>
+      <mat-cell *matCellDef="let request"> {{request.project}} </mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="subproject">
-    <mat-header-cell *matHeaderCellDef> Подпроект </mat-header-cell>
-    <mat-cell *matCellDef="let request"> {{request.subproject}} </mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="subproject">
+      <mat-header-cell *matHeaderCellDef> Подпроект </mat-header-cell>
+      <mat-cell *matCellDef="let request"> {{request.subproject}} </mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="requestNumber">
-    <mat-header-cell *matHeaderCellDef> Номер заявки на командировку </mat-header-cell>
-    <mat-cell *matCellDef="let request"> {{request.requestNumber}} </mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="requestNumber">
+      <mat-header-cell *matHeaderCellDef> Номер заявки на командировку </mat-header-cell>
+      <mat-cell *matCellDef="let request"> {{request.requestNumber}} </mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="budget">
-    <mat-header-cell *matHeaderCellDef> Бюджет </mat-header-cell>
-    <mat-cell *matCellDef="let request"> {{request.budget}} </mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="budget">
+      <mat-header-cell *matHeaderCellDef> Бюджет </mat-header-cell>
+      <mat-cell *matCellDef="let request"> {{request.budget}} </mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="cost">
-    <mat-header-cell *matHeaderCellDef> Стоимость </mat-header-cell>
-    <mat-cell *matCellDef="let request"> {{request.cost}} </mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="cost">
+      <mat-header-cell *matHeaderCellDef> Стоимость </mat-header-cell>
+      <mat-cell *matCellDef="let request"> {{request.cost}} </mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="manager">
-    <mat-header-cell *matHeaderCellDef> Менеджер проекта </mat-header-cell>
-    <mat-cell *matCellDef="let request"> {{request.manager}} </mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="manager">
+      <mat-header-cell *matHeaderCellDef> Менеджер проекта </mat-header-cell>
+      <mat-cell *matCellDef="let request"> {{request.manager}} </mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="status">
-    <mat-header-cell *matHeaderCellDef> Статус заявки </mat-header-cell>
-    <mat-cell *matCellDef="let request"> {{request.status}} </mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef> Статус заявки </mat-header-cell>
+      <mat-cell *matCellDef="let request"> {{request.status}} </mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="officeManager">
-    <mat-header-cell *matHeaderCellDef> Офис менеджер </mat-header-cell>
-    <mat-cell *matCellDef="let request"> {{request.officeManager}} </mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="officeManager">
+      <mat-header-cell *matHeaderCellDef> Офис менеджер </mat-header-cell>
+      <mat-cell *matCellDef="let request"> {{request.officeManager}} </mat-cell>
+    </ng-container>
 
-  <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
-  <mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></mat-row>
+    <mat-header-row *matHeaderRowDef="columnsToDisplay"></mat-header-row>
+    <mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></mat-row>
 
-</mat-table>
+  </mat-table>
+  <mat-paginator #paginator
+                 [pageSize]="5"
+                 [pageSizeOptions]="[5, 10, 20]"
+                 (page)="pageEvent = $event"
+                 [showFirstLastButtons]="true">
+  </mat-paginator>
+</div>

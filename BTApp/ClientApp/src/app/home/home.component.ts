@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { HttpService } from '../services/http.service';
 import { EmployeeBase, Request, Project, Subproject, RequestViewModel } from '../models/models';
+import { PageEvent, MatPaginator, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,7 @@ import { EmployeeBase, Request, Project, Subproject, RequestViewModel } from '..
 
 export class HomeComponent implements OnInit {
   private i: number;
+  public isLoading: boolean = true;
   public requests: Request[];
   public requestViewModels: RequestViewModel[];
   public employeesBase: EmployeeBase[];
@@ -21,8 +23,12 @@ export class HomeComponent implements OnInit {
   done: boolean = false;
   newEmployeeBase: EmployeeBase = new EmployeeBase();
   newRequest: Request = new Request();
+  pageEvent: PageEvent;
   
   columnsToDisplay: string[] = ['requestId', 'date', 'declarer', 'project', 'subproject', 'requestNumber', 'budget', 'cost', 'manager', 'status', 'officeManager'];
+  dataSource = new MatTableDataSource<RequestViewModel>([]);
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private httpService: HttpService) { }
 
@@ -31,6 +37,7 @@ export class HomeComponent implements OnInit {
   pageOfItems: RequestViewModel[];
 
   ngOnInit() {
+    this.isLoading = true;
 
     this.i = 0;
     this.newRequest = new Request();
@@ -48,6 +55,9 @@ export class HomeComponent implements OnInit {
       .subscribe(result => { this.subprojects = result; }, error => console.error(error), () => this.callback(this.subprojects));
 
     //console.log(this.employeesBase);
+  }
+
+  ngAfterViewInit() {
   }
 
   addEmployeeBase(newEmployeeBase: EmployeeBase) {
@@ -133,6 +143,10 @@ export class HomeComponent implements OnInit {
         this.requestViewModels[i].subproject = sprj.name;
       }
     })
+
+    this.dataSource = new MatTableDataSource<RequestViewModel>(this.requestViewModels);
+    this.dataSource.paginator = this.paginator;
+    this.isLoading = false;
   }
   
   goEdit(id: string) {
@@ -167,5 +181,11 @@ export class HomeComponent implements OnInit {
   onChangePage(pageOfItems: RequestViewModel[]) {
     // update current page of items
     this.pageOfItems = pageOfItems;
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
   }
 }
