@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+//import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-nav-menu',
@@ -6,7 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./nav-menu.component.css']
 })
 export class NavMenuComponent {
-  isExpanded = false;
+
+  toggle: boolean;
+  //mode = new FormControl('over');
+
+  /*isExpanded = false;
 
   collapse() {
     this.isExpanded = false;
@@ -14,5 +19,5 @@ export class NavMenuComponent {
 
   toggle() {
     this.isExpanded = !this.isExpanded;
-  }
+  } */
 }

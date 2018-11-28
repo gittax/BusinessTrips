@@ -1,4 +1,4 @@
-.pagination {
+/*.pagination {
   position: fixed;
 }
 .example-container {
@@ -22,6 +22,7 @@
   max-height: 500px;
   min-width: inherit;
 }
+  */
 
 .example-container{
   min-width: 1000px;

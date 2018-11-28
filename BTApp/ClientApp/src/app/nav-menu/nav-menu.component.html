@@ -1,4 +1,5 @@
-<div class='main-nav'>
+<!--
+    <div class='main-nav'>
     <div class='navbar navbar-inverse'>
         <div class='navbar-header'>
             <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse' [attr.aria-expanded]='isExpanded' (click)='toggle()'>
@@ -36,3 +37,13 @@
         </div>
     </div>
 </div>
+-->
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav mode="side" [(opened)]="toggle">
+    Sidenav content
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <p><button mat-button (click)="sidenav.toggle()">sidenav.toggle()</button></p>
+  </mat-sidenav-content>
+</mat-sidenav-container>

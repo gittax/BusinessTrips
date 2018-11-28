@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule, MatInputModule } from '@angular/material';
 import { MatSortModule } from '@angular/material/sort';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -33,6 +34,7 @@ import { TicketsComponent } from './tickets/tickets.component';
     MatTableModule,
     MatInputModule,
     MatSortModule,
+    MatSidenavModule,
     MatPaginatorModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
