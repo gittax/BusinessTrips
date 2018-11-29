@@ -1,7 +1,11 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { HttpService } from '../services/http.service';
 import { EmployeeBase, Request, Project, Subproject, RequestViewModel } from '../models/models';
-import { PageEvent, MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
+import { PageEvent, MatDialog, MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
+
+import { AddDialogComponent } from './dialogs/add.dialog/add.dialog.component';
+import { EditDialogComponent } from './dialogs/edit.dialog/edit.dialog.component';
+import { DeleteDialogComponent } from './dialogs/delete.dialog/delete.dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -29,9 +33,10 @@ export class HomeComponent implements OnInit {
   dataSource = new MatTableDataSource<RequestViewModel>([]);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-@ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService,
+    public dialog: MatDialog) { }
 
   items: RequestViewModel[] = this.requestViewModels;
 
@@ -79,12 +84,23 @@ export class HomeComponent implements OnInit {
   }
   
   editRequest(id: string, request: Request) {
-    this.httpService.putRequest(id, request)
-      .subscribe(result => { console.log(result) }, error => console.error(error), () => this.ngOnInit());
-    var editButton = document.getElementsByClassName('edit');
-    var addButton = document.getElementsByClassName('add');
-    addButton[0].removeAttribute('hidden');
-    editButton[0].setAttribute('hidden', '');
+
+    const dialogRef = this.dialog.open(EditDialogComponent, {
+      data: { id: id, request: request }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 1) {
+        this.ngOnInit();
+        /*
+        this.httpService.putRequest(id, request)
+          .subscribe(result => { console.log(result) }, error => console.error(error), () => this.ngOnInit());
+        var editButton = document.getElementsByClassName('edit');
+        var addButton = document.getElementsByClassName('add');
+        addButton[0].removeAttribute('hidden');
+        editButton[0].setAttribute('hidden', '');*/
+      }
+    });
   }
 
   deleteRequest(id: string) {
