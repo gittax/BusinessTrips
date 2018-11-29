@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../services/http.service';
-import { EmployeeBase, Employee, Request, Ticket, TicketViewModel, EmployeeBaseViewModel} from '../models/models';
+import { EmployeeBase, Employee, Request, Ticket, TicketViewModel, EmployeeBaseViewModel } from '../models/models';
+import { DxDataGridModule } from 'devextreme-angular';
 
 @Component({
   selector: 'app-tickets',

@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule, MatInputModule } from '@angular/material';
 import { MatSortModule } from '@angular/material/sort';
+import { DxDataGridModule, DxServerTransferStateModule } from 'devextreme-angular';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -34,6 +35,8 @@ import { TicketsComponent } from './tickets/tickets.component';
     MatInputModule,
     MatSortModule,
     MatPaginatorModule,
+    DxDataGridModule,
+    DxServerTransferStateModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'employees', component: EmployeesComponent },
