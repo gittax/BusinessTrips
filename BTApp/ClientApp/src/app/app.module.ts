@@ -6,7 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule, MatInputModule } from '@angular/material';
-import { MatSortModule } from '@angular/material/sort';
+import { MatSortModule } from '@angular/material/sort'; 
+import { DxDataGridModule } from 'devextreme-angular';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -36,6 +37,7 @@ import { JwPaginationComponent } from 'jw-angular-pagination';
     MatInputModule,
     MatSortModule,
     MatPaginatorModule,
+    DxDataGridModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'employees', component: EmployeesComponent },

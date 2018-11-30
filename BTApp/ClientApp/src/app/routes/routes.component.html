@@ -1,7 +1,7 @@
 <h1>Routes</h1>
 
 <p>Fetching requests from the DB.</p>
-
+<!--
 <p *ngIf="!routes"><em>Loading...</em></p>
 
 <table class='table' *ngIf="routes">
@@ -63,3 +63,10 @@
 </table>
 
 <jw-pagination [items]="routeViewModels" [pageSize]="5" (changePage)="onChangePage($event)"></jw-pagination>
+-->
+
+<dx-data-grid id="gridContainer"
+              [dataSource]="routeViewModels"
+              [columns]="['routeId', 'routeType', 'departureTime', 'arrivalTime', 'ticketType', 'departureCity', 'arrivalCity', 'flightNumber', 'classType', 'budget', 'requestId']"
+              [showBorders]="true">
+</dx-data-grid>
