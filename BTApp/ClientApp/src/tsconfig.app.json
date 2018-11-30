@@ -3,6 +3,9 @@
   "compilerOptions": {
     "outDir": "../out-tsc/app",
     "baseUrl": "./",
+    "paths": {
+      "jszip": [ "../node_modules/jszip/dist/jszip.min.js" ]
+    },
     "module": "es2015",
     "types": []
   },
