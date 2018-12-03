@@ -66,8 +66,14 @@
 -->
 
 <dx-data-grid id="gridContainer"
-              [dataSource]="routeViewModels"
-              [showBorders]="true">
+              keyExpr="routeId"
+              [dataSource]="routes"
+              [remoteOperations]="true"
+              [showBorders]="true"
+              (onRowInserted)="onRowInserted($event)"
+              (onRowUpdated)="onRowUpdated($event)"
+              (onRowRemoved)="onRowRemoved($event)"
+              (onEditorPreparing)="onEditorPreparing($event)">
 
   <dxo-paging [pageSize]="2"></dxo-paging>
   <dxo-pager [showPageSizeSelector]="true"
@@ -79,19 +85,29 @@
   <dxo-group-panel [visible]="true"></dxo-group-panel>
   <dxo-scrolling mode="virtual"></dxo-scrolling>
   <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
+  <dxo-editing mode="row"
+             [allowAdding]="true"
+             [allowUpdating]="true"
+             [allowDeleting]="true">
+  </dxo-editing>
 
   <dxi-column dataField="routeId"></dxi-column>
-  <dxi-column dataField="routeType"></dxi-column>
+  <dxi-column dataField="routeType">
+    <dxo-lookup [dataSource]="routeTypes" valueExpr="ID" displayExpr="Name"></dxo-lookup>
+  </dxi-column>
   <dxi-column dataField="departureTime" dataType="date"></dxi-column>
   <dxi-column dataField="arrivalTime" dataType="date"></dxi-column>
-  <dxi-column dataField="ticketType"></dxi-column>
+  <dxi-column dataField="ticketType">
+    <dxo-lookup [dataSource]="ticketTypes" valueExpr="value" displayExpr="text"></dxo-lookup>
+  </dxi-column>
   <dxi-column dataField="departureCity"></dxi-column>
   <dxi-column dataField="arrivalCity"></dxi-column>
   <dxi-column dataField="flightNumber"></dxi-column>
-  <dxi-column dataField="classType"></dxi-column>
+  <dxi-column dataField="classType">
+    <dxo-lookup [dataSource]="classTypes" valueExpr="value" displayExpr="text"></dxo-lookup>
+</dxi-column>
   <dxi-column dataField="budget" format="currency"></dxi-column>
-  <dxi-column dataField="requestId"></dxi-column>
-  <dxo-remote-operations [sorting]="true"
-                         [paging]="true">
-  </dxo-remote-operations>
+  <dxi-column dataField="requestId">
+    <dxo-lookup [dataSource]="requests" valueExpr="requestId" displayExpr="requestId"></dxo-lookup>
+  </dxi-column>
 </dx-data-grid>
