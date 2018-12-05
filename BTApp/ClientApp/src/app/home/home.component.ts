@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
   dataSource = new MatTableDataSource<RequestViewModel>([]);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-@ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private httpService: HttpService) { }
 

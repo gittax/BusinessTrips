@@ -1,69 +1,6 @@
 <h1>Routes</h1>
 
 <p>Fetching requests from the DB.</p>
-<!--
-<p *ngIf="!routes"><em>Loading...</em></p>
-
-<table class='table' *ngIf="routes">
-  <thead>
-    <tr>
-      <th>ID маршрута</th>
-      <th>Тип маршрута</th>
-      <th>Дата отправления</th>
-      <th>Дата прибытия</th>
-      <th>Тип билета</th>
-      <th>Город отправления</th>
-      <th>Город назначения</th>
-      <th>Рейс/Поезд</th>
-      <th>Класс</th>
-      <th>Бюджет</th>
-      <th>ID заявки</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let route of pageOfItems">
-      <td>{{ route.routeId }}</td>
-      <td>{{ route.routeType }}</td>
-      <td>{{ route.departureTime | date:'MM/dd/yyyy HH:mm' }}</td>
-      <td>{{ route.arrivalTime | date:'MM/dd/yyyy HH:mm' }}</td>
-      <td>{{ route.ticketType }}</td>
-      <td>{{ route.departureCity }}</td>
-      <td>{{ route.arrivalCity }}</td>
-      <td>{{ route.flightNumber }}</td>
-      <td>{{ route.classType }}</td>
-      <td>{{ route.budget }}</td>
-      <td>{{ route.requestId }}</td>
-      <td><button (click)="deleteRoute(route.routeId)">Del</button> <button (click)="goEdit(route.routeId)">Edit</button></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td><select [(ngModel)]="newRoute.routeType"><option *ngFor="let routeType of routeTypes" [value]="routeTypes.indexOf(routeType)">{{routeType}}</option></select></td>
-      <td><input type="datetime-local" [(ngModel)]="newRoute.departureTime" required></td>
-      <td><input type="datetime-local" [(ngModel)]="newRoute.arrivalTime" required></td>
-      <td><select [(ngModel)]="newRoute.ticketType"><option *ngFor="let ticketType of ticketTypes" [value]="ticketTypes.indexOf(ticketType)">{{ticketType}}</option></select></td>
-      <td><input [(ngModel)]="newRoute.departureCity" required></td>
-      <td><input [(ngModel)]="newRoute.arrivalCity" required></td>
-      <td><input [(ngModel)]="newRoute.flightNumber" required></td>
-      <td>
-        <select *ngIf="newRoute.routeType==0" [(ngModel)]="newRoute.classType">
-          <option *ngFor="let classType of flightClassTypes" [value]="flightClassTypes.indexOf(classType)">{{classType}}</option>
-        </select>
-        <select *ngIf="newRoute.routeType==1" [(ngModel)]="newRoute.classType">
-          <option *ngFor="let classType of trainClassTypes" [value]="trainClassTypes.indexOf(classType)+4">{{classType}}</option>
-        </select>
-      </td>
-      <td><input [(ngModel)]="newRoute.budget" required></td>
-      <td><select [(ngModel)]="newRoute.requestId" required> <option *ngFor="let rqst of requests" [value]="rqst.requestId">{{rqst.requestId}}</option></select></td>
-      <td>
-        <button class="add" *ngIf="routes" type="submit" (click)='addRoute(newRoute)'>Add <i class='fas fa-plus'></i></button>
-        <button class="edit" *ngIf="routes" type="submit" (click)='editRoute(newRoute.routeId, newRoute)' hidden>Submit</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<jw-pagination [items]="routeViewModels" [pageSize]="5" (changePage)="onChangePage($event)"></jw-pagination>
--->
 
 <dx-data-grid id="gridContainer"
               keyExpr="routeId"
@@ -92,8 +29,8 @@
   </dxo-editing>
 
   <dxi-column dataField="routeId"></dxi-column>
-  <dxi-column dataField="routeType">
-    <dxo-lookup [dataSource]="routeTypes" valueExpr="ID" displayExpr="Name"></dxo-lookup>
+  <dxi-column dataField="routeType" [setCellValue]="setRouteTypeValue">
+    <dxo-lookup [dataSource]="routeTypes" valueExpr="value" displayExpr="text"></dxo-lookup>
   </dxi-column>
   <dxi-column dataField="departureTime" dataType="date"></dxi-column>
   <dxi-column dataField="arrivalTime" dataType="date"></dxi-column>
@@ -104,7 +41,7 @@
   <dxi-column dataField="arrivalCity"></dxi-column>
   <dxi-column dataField="flightNumber"></dxi-column>
   <dxi-column dataField="classType">
-    <dxo-lookup [dataSource]="classTypes" valueExpr="value" displayExpr="text"></dxo-lookup>
+    <dxo-lookup [dataSource]="getFilteredClasses" valueExpr="value" displayExpr="text"></dxo-lookup>
 </dxi-column>
   <dxi-column dataField="budget" format="currency"></dxi-column>
   <dxi-column dataField="requestId">

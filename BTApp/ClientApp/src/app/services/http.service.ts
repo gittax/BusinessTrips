@@ -1,7 +1,7 @@
 import { Inject } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { EmployeeBase, Employee, EmployeeBaseProjectAssign, EmployeeRouteAssign, Request, Project, Route, Subproject, Ticket } from '../models/models';
+import { EmployeeBase, Employee, EmployeeBaseProjectAssign, EmployeeRouteAssign, Request, Project, Route, Subproject, Ticket,  LookUpClass } from '../models/models';
 @Injectable()
 export class HttpService {
   private baseUrl: string;
@@ -74,6 +74,18 @@ export class HttpService {
 
   getRoute() {
     return this.http.get<Route[]>(this.baseUrl + `api/Routes`)
+  }
+
+  getRouteTypes() {
+    return this.http.get<LookUpClass[]>(this.baseUrl + `api/Routes/RouteTypes`)
+  }
+
+  getTicketTypes() {
+    return this.http.get<LookUpClass[]>(this.baseUrl + `api/Routes/TicketTypes`)
+  }
+
+  getClassTypes() {
+    return this.http.get<LookUpClass[]>(this.baseUrl + `api/Routes/ClassTypes`)
   }
 
   postRoute(route: Route) {

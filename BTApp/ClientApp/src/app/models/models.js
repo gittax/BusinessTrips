@@ -78,4 +78,10 @@ var TicketViewModel = /** @class */ (function () {
     return TicketViewModel;
 }());
 exports.TicketViewModel = TicketViewModel;
+var LookUpClass = /** @class */ (function () {
+    function LookUpClass() {
+    }
+    return LookUpClass;
+}());
+exports.LookUpClass = LookUpClass;
 //# sourceMappingURL=models.js.map

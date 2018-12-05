@@ -27,6 +27,44 @@ namespace BTApp.Controllers
             return _context.Route;
         }
 
+        // GET: api/Routes/RouteTypes
+        [HttpGet("RouteTypes")]
+        public List<LookUpClass> GetRouteTypes()
+        {
+            return new List<LookUpClass>
+            {
+                new LookUpClass {Value = 0, Text = "Flight"},
+                new LookUpClass {Value = 1, Text = "Train"}
+            };
+        }
+
+        // GET: api/Routes/TicketTypes
+        [HttpGet("TicketTypes")]
+        public List<LookUpClass> GetTicketTypes()
+        {
+            return new List<LookUpClass>
+            {
+                new LookUpClass {Value = 0, Text = "Departure"},
+                new LookUpClass {Value = 1, Text = "Arrival"},
+                new LookUpClass {Value = 2, Text = "Transit"}
+            };
+        }
+
+        // GET: api/Routes/ClassTypes
+        [HttpGet("ClassTypes")]
+        public List<LookUpClass> GetClassTypes()
+        {
+            return new List<LookUpClass>
+            {
+                new LookUpClass {Value = 0, Text = "Economy Class", RouteType = 0},
+                new LookUpClass {Value = 1, Text = "Premium Economy Class", RouteType = 0},
+                new LookUpClass {Value = 2, Text = "Business Class", RouteType = 0},
+                new LookUpClass {Value = 3, Text = "First Class", RouteType = 0},
+                new LookUpClass {Value = 4, Text = "Coupe", RouteType = 1},
+                new LookUpClass {Value = 5, Text = "Sit", RouteType = 1}
+            };
+        }
+
         // GET: api/Routes/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetRoute([FromRoute] int id)

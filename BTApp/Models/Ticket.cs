@@ -10,7 +10,7 @@ namespace BTApp.Models
     {
         public int TicketId { get; set; }
         public double Cost { get; set; }
-        public RouteType RouteType { get; set; }
+        public int RouteType { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]

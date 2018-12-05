@@ -86,14 +86,14 @@ export class RequestViewModel {
 
 export class Route {
   routeId: number;
-  routeType: string;
+  routeType: number;
   departureTime: Date;
   arrivalTime: Date;
-  ticketType: string;
+  ticketType: number;
   departureCity: string;
   arrivalCity: string;
   flightNumber: string;
-  classType: string;
+  classType: number;
   budget: number;
   requestId: number;
 }
@@ -107,7 +107,7 @@ export class Subproject {
 export class Ticket {
   ticketId: number;
   cost: number;
-  routeType: string;
+  routeType: number;
   departureTime: Date;
   arrivalTime: Date;
   employeeId: number;
@@ -117,9 +117,15 @@ export class Ticket {
 export class TicketViewModel {
   ticketId: number;
   cost: number;
-  routeType: string;
+  routeType: number;
   departureTime: Date;
   arrivalTime: Date;
   employee: string;
   requestId: number;
+}
+
+export class LookUpClass {
+  value: number;
+  text: string;
+  routeType: number;
 }
