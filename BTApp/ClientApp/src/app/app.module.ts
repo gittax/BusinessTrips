@@ -8,6 +8,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule, MatInputModule } from '@angular/material';
 import { MatSortModule } from '@angular/material/sort'; 
 import { DxDataGridModule } from 'devextreme-angular';
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -38,6 +39,7 @@ import { JwPaginationComponent } from 'jw-angular-pagination';
     MatSortModule,
     MatPaginatorModule,
     DxDataGridModule,
+    LoggerModule.forRoot({ serverLoggingUrl: '/api/Logs', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.DEBUG }),
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'employees', component: EmployeesComponent },

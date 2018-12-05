@@ -2,12 +2,13 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { HttpService } from '../services/http.service';
 import { EmployeeBase, Request, Project, Subproject, RequestViewModel, LookUpClass } from '../models/models';
 import { PageEvent, MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
+import { NGXLogger } from 'ngx-logger';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [HttpService]
+  providers: [HttpService, NGXLogger]
 })
 
 export class HomeComponent implements OnInit {
@@ -28,7 +29,10 @@ export class HomeComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService, private logger: NGXLogger) {
+    this.logger.debug('Your log message goes here');
+    this.logger.debug('Multiple', 'Argument', 'support');
+  }
 
   ngOnInit() {
     this.isLoading = true;
