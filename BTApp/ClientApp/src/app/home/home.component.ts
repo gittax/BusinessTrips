@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { HttpService } from '../services/http.service';
-import { EmployeeBase, Request, Project, Subproject, RequestViewModel } from '../models/models';
+import { EmployeeBase, Request, Project, Subproject, RequestViewModel, LookUpClass } from '../models/models';
 import { PageEvent, MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 
 @Component({
@@ -18,10 +18,7 @@ export class HomeComponent implements OnInit {
   public employeesBase: EmployeeBase[];
   public projects: Project[];
   public subprojects: Subproject[];
-  public localSubprojects: Subproject[];
-  public statuses: string[] = ["Created", "Awaits for PM approval", "Pending payment", "Payment passed"];
-  done: boolean = false;
-  newEmployeeBase: EmployeeBase = new EmployeeBase();
+  public statuses: LookUpClass[];
   newRequest: Request = new Request();
   pageEvent: PageEvent;
   
@@ -33,74 +30,67 @@ export class HomeComponent implements OnInit {
 
   constructor(private httpService: HttpService) { }
 
-  items: RequestViewModel[] = this.requestViewModels;
-
-  pageOfItems: RequestViewModel[];
-
   ngOnInit() {
     this.isLoading = true;
 
     this.i = 0;
     this.newRequest = new Request();
 
-    this.httpService.getEmployeeBase()
-      .subscribe(result => { this.employeesBase = result; }, error => console.error(error), () => this.callback(this.employeesBase));
-
-    this.httpService.getRequest()
-      .subscribe(result => { this.requests = result; }, error => console.error(error), () => this.callback(this.requests));
-
-    this.httpService.getProject()
-      .subscribe(result => { this.projects = result; }, error => console.error(error), () => this.callback(this.projects));
-
-    this.httpService.getSubproject()
-      .subscribe(result => { this.subprojects = result; }, error => console.error(error), () => this.callback(this.subprojects));
-
-    //console.log(this.employeesBase);
+    this.getEmployeeBase();
+    this.getRequests();
+    this.getProjects();
+    this.getSubprojects();
+    this.getRequestStatuses();
   }
 
   ngAfterViewInit() {
   }
 
-  addEmployeeBase(newEmployeeBase: EmployeeBase) {
-    this.httpService.postEmployeeBase(newEmployeeBase)
-      .subscribe(result => { console.log(result) }, error => console.error(error), () => this.ngOnInit());
+  getEmployeeBase() {
+    this.httpService.getEmployeeBase()
+      .subscribe(result => { this.employeesBase = result; }, error => console.error(error), () => this.callback(this.employeesBase));
   }
 
-  deleteEmployeeBase(id: string) {
-    this.httpService.deleteEmployeeBase(id)
-      .subscribe(result => { console.log(result) }, error => console.error(error), () => this.ngOnInit());
+  getRequests() {
+    this.httpService.getRequest()
+      .subscribe(result => { this.requests = result; }, error => console.error(error), () => this.callback(this.requests));
+  }
+
+  getProjects() {
+    this.httpService.getProject()
+      .subscribe(result => { this.projects = result; }, error => console.error(error), () => this.callback(this.projects));
+  }
+
+  getSubprojects() {
+    this.httpService.getSubproject()
+      .subscribe(result => { this.subprojects = result; }, error => console.error(error), () => this.callback(this.subprojects));
+  }
+
+  getRequestStatuses() {
+    this.httpService.getRequestStatuses()
+      .subscribe(result => { this.statuses = result; }, error => console.log(error), () => this.callback(this.statuses));
   }
 
   addRequest(newRequest: Request) {
     this.httpService.postRequest(newRequest)
-      .subscribe(result => { console.log(result) }, error => console.error(error), () => this.ngOnInit());
-    //this.datePipe.transform(newRequest.date, 'yyyy/MM/dd');
-    //добавить обработчик для РЕДАКТИРОВАНИЯ ManagerId в Project (отправка по Id выбранного проекта)
+      .subscribe(result => { console.log(result) }, error => console.error(error), () => this.getRequests());
   }
   
   editRequest(id: string, request: Request) {
     this.httpService.putRequest(id, request)
-      .subscribe(result => { console.log(result) }, error => console.error(error), () => this.ngOnInit());
-    var editButton = document.getElementsByClassName('edit');
-    var addButton = document.getElementsByClassName('add');
-    addButton[0].removeAttribute('hidden');
-    editButton[0].setAttribute('hidden', '');
+      .subscribe(result => { console.log(result) }, error => console.error(error), () => this.getRequests());
   }
 
   deleteRequest(id: string) {
     this.httpService.deleteRequest(id)
-      .subscribe(result => { console.log(result) }, error => console.error(error), () => this.ngOnInit());
-  }
-
-  check() {
-    this.ngOnInit();
+      .subscribe(result => { console.log(result) }, error => console.error(error), () => this.getRequests());
   }
 
   callback(result) {
     console.log(result);
     this.i++;
     console.log(this.i);
-    if (this.i == 4) {
+    if (this.i == 5) {
       this.constructArray();
     }
   }
@@ -111,7 +101,6 @@ export class HomeComponent implements OnInit {
       console.log('requests.length = 0');
       return;
     }
-    var emp: EmployeeBase = new EmployeeBase();
     var prj: Project = new Project();
     var sprj: Subproject = new Subproject();
 
@@ -124,15 +113,11 @@ export class HomeComponent implements OnInit {
       this.requestViewModels[i].businessTripNumber = request.businessTripNumber;
       this.requestViewModels[i].budget = request.budget;
       this.requestViewModels[i].cost = request.cost;
-      this.requestViewModels[i].status = this.statuses[request.status];
+      this.requestViewModels[i].status = this.statuses.find(x=>x.value==request.status).text;
 
-
-      emp = this.employeesBase.find(x => x.employeeBaseId == request.declarerId)
-      this.requestViewModels[i].declarer = emp.name;
-      emp = this.employeesBase.find(x => x.employeeBaseId == request.managerId)
-      this.requestViewModels[i].manager = emp.name;
-      emp = this.employeesBase.find(x => x.employeeBaseId == request.officeManagerId)
-      this.requestViewModels[i].officeManager = emp.name;
+      this.requestViewModels[i].declarer = this.employeesBase.find(x => x.employeeBaseId == request.declarerId).name;
+      this.requestViewModels[i].manager = this.employeesBase.find(x => x.employeeBaseId == request.managerId).name;
+      this.requestViewModels[i].officeManager = this.employeesBase.find(x => x.employeeBaseId == request.officeManagerId).name;
 
       prj = this.projects.find(x => x.projectId == request.projectId)
       if (prj) {
@@ -149,40 +134,6 @@ export class HomeComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.isLoading = false;
-  }
-  
-  goEdit(id: string) {
-    var editButton = document.getElementsByClassName('edit');
-    var addButton = document.getElementsByClassName('add');
-    editButton[0].removeAttribute('hidden');
-    addButton[0].setAttribute('hidden', '');
-
-    var nid = +id;
-    
-    var rqst: Request = this.requests.find(x => x.requestId == nid)
-    
-    this.newRequest = rqst;
-    this.onChange(rqst.projectId);
-  }
-
-  onChange(projectId) {
-    this.localSubprojects = [];
-    console.log(projectId);
-    projectId = +projectId;
-    this.newRequest.projectId = projectId;
-    this.subprojects.forEach((sprj) => {
-      if (sprj.projectId == projectId) {
-        this.localSubprojects.push(new Subproject());
-        this.localSubprojects[this.localSubprojects.length - 1] = sprj;
-        //this.localSubprojects[this.localSubprojects.length - 1].subprojectId = sprj.subprojectId;
-      }
-    });
-    // ... do other stuff here ...
-  }
-
-  onChangePage(pageOfItems: RequestViewModel[]) {
-    // update current page of items
-    this.pageOfItems = pageOfItems;
   }
 
   applyFilter(filterValue: string) {

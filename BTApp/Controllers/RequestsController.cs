@@ -27,6 +27,19 @@ namespace BTApp.Controllers
             return _context.Request;
         }
 
+        // GET: api/Requests/Statuses
+        [HttpGet("Statuses")]
+        public List<LookUpClass> GetStatuses()
+        {
+            return new List<LookUpClass>
+            {
+                new LookUpClass { Value = 0, Text = "Created" },
+                new LookUpClass { Value = 1, Text = "Awaits for PM approval" },
+                new LookUpClass { Value = 2, Text = "Pending payment" },
+                new LookUpClass { Value = 3, Text = "Payment passed" }
+            };
+        }
+
         // GET: api/Requests/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetRequest([FromRoute] int id)

@@ -17,7 +17,7 @@ namespace BTApp.Models
         public string BusinessTripNumber { get; set; }
         public double Budget { get; set; }
         public double Cost { get; set; }
-        public StatusType Status { get; set; }
+        public int Status { get; set; }
 
         public int DeclarerId { get; set; }
         //public EmployeeBase Declarer { get; set; }
@@ -30,16 +30,5 @@ namespace BTApp.Models
         //public Project Project { get; set; }
         public int? SubprojectId { get; set; }
         //public Subproject Subproject { get; set; }
-    }
-    public enum StatusType
-    {
-        [Display(Name = "Created")]
-        Created = 0,
-        [Display(Name = "Awaits for PM approval")]
-        PMapprove = 1,
-        [Display(Name = "Pending payment")]
-        PayPending = 2,
-        [Display(Name = "Payment passed")]
-        Paid = 3
     }
 }

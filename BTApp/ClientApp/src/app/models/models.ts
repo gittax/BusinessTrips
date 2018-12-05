@@ -61,7 +61,7 @@ export class Request {
   businessTripNumber: string;
   budget: number;
   cost: number;
-  status: string;
+  status: number;
   declarerId: number;
   managerId: number;
   officeManagerId: number;

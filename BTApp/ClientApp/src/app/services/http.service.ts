@@ -47,6 +47,10 @@ export class HttpService {
     return this.http.get<Request[]>(this.baseUrl + `api/Requests`)
   }
 
+  getRequestStatuses() {
+    return this.http.get<LookUpClass[]>(this.baseUrl + `api/Requests/Statuses`)
+  }
+
   postRequest(request: Request) {
     return this.http.post<Request>(this.baseUrl + `api/Requests`, request);
   }
